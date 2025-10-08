@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arctic Monkeys - MELOVOID</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #0c0c0c 0%, #1a1a1a 100%);
+            min-height: 100vh;
+        }
+
+        .hero-gradient {
+            background: linear-gradient(135deg, 
+                rgba(220, 38, 127, 0.1) 0%, 
+                rgba(0, 0, 0, 0.8) 50%, 
+                rgba(0, 0, 0, 1) 100%);
+        }
+
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .track-item:hover {
+            background: rgba(220, 38, 127, 0.1);
+        }
+
+        .album-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(220, 38, 127, 0.3);
+        }
+
+        .play-button {
+            transition: all 0.3s ease;
+        }
+
+        .play-button:hover {
+            background: #dc267f;
+            transform: scale(1.1);
+        }
+
+        .stat-number {
+            background: linear-gradient(135deg, #dc267f, #ff6bb3);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: #dc267f;
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: rgba(255,255,255,0.1);
+        }
+
+        .fan-also-like-item {
+            transition: all 0.3s ease;
+        }
+
+        .fan-also-like-item:hover {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body class="text-white">
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 bg-black/80 backdrop-blur-md border-b border-white/10">
+        <div class="max-w-7xl mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <div class="w-8 h-8 bg-gradient-to-r from-pink-500 to-purple-500 rounded-full flex items-center justify-center">
+                        <i class="fas fa-music text-white text-sm"></i>
+                    </div>
+                    <span class="text-xl font-bold">MELO<span class="text-pink-500">VOID</span></span>
+                </div>
+                
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#" class="text-sm hover:text-pink-400 transition-colors">Home</a>
+                    <a href="#" class="text-sm hover:text-pink-400 transition-colors">Browse</a>
+                    <a href="#" class="text-sm hover:text-pink-400 transition-colors">Radio</a>
+                    <a href="#" class="text-sm hover:text-pink-400 transition-colors">Search</a>
+                    <a href="#" class="text-sm hover:text-pink-400 transition-colors">Your Library</a>
+                </div>
+
+                <div class="flex items-center space-x-4">
+                    <button class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center hover:bg-pink-500 transition-all">
+                        <i class="fas fa-search text-sm"></i>
+                    </button>
+                    <button class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center hover:bg-pink-500 transition-all">
+                        <i class="fas fa-user text-sm"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+   <section class="relative h-[600px] overflow-hidden">
+    <div class="absolute inset-0 z-0">
+        <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?q=80&w=1500&auto=format&fit=crop" 
+             alt="Arctic Monkeys" 
+             class="w-full h-full object-cover object-top">
+        <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
+    </div>
+
+    <!-- هنا زودت pl-20 عشان يتحرك يمين -->
+    <div class="absolute bottom-6 left-6 right-6 z-10 pl-20">
+        <h1 class="text-5xl md:text-7xl font-bold text-white mb-2">ARCTIC MONKEYS</h1>
+        <div class="flex items-center space-x-6 text-sm text-gray-200 mb-6">
+            <span class="text-2xl font-bold">52,569,820</span>
+            <span>monthly listeners</span>
+        </div>
+
+        <div class="flex items-center space-x-4">
+            <!-- Play Button -->
+            <button class="w-12 h-12 flex items-center justify-center rounded-full bg-[#EC4899] text-white hover:scale-110 transition-transform">
+                <i class="fas fa-play"></i>
+            </button>
+
+            <!-- Follow Button -->
+            <button class="px-6 py-2 border border-white rounded-full text-white hover:bg-white hover:text-black transition-all">
+                Follow
+            </button>
+
+            <!-- More Options -->
+            <button class="w-10 h-10 flex items-center justify-center text-white hover:bg-white/10 rounded-full transition-all">
+                <i class="fas fa-ellipsis-h"></i>
+            </button>
+        </div>
+    </div>
+</section>
+
+
+    <!-- Popular Tracks -->
+    <section class="py-12">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex items-center justify-between mb-8">
+                <h2 class="text-2xl font-bold">Popular</h2>
+                <button class="text-sm text-gray-400 hover:text-white transition-colors">See more</button>
+            </div>
+
+            <div class="space-y-2">
+                <!-- Track 1 -->
+                <div class="track-item flex items-center justify-between p-3 rounded-lg hover:bg-white/5 transition-all group">
+                    <div class="flex items-center space-x-4">
+                        <div class="relative">
+                            <span class="text-gray-400 text-sm w-4 group-hover:opacity-0 transition-opacity">1</span>
+                            <button class="play-button absolute inset-0 w-8 h-8 bg-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all">
+                                <i class="bx bx-play text-black text-sm ml-0.5"></i>
+                            </button>
+                        </div>
+                        <img src="https://upload.wikimedia.org/wikipedia/en/a/ad/AM_%28Arctic_Monkeys_album%29_cover.jpg" 
+                             class="w-10 h-10 rounded" alt="AM">
+                        <div>
+                            <p class="font-medium">I Wanna Be Yours</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <span class="stat-number font-bold">1,234,171,897</span>
+                        <button class="w-6 h-6 flex items-center justify-center text-gray-400 hover:text-white">
+                            <i class="fas fa-heart text-xs"></i>
+                        </button>
+                        <span class="text-gray-400 text-sm">3:03</span>
+                        <button class="w-6 h-6 flex items-center justify-center text-gray-400 hover:text-white">
+                            <i class="fas fa-ellipsis-h text-xs"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Track 2 -->
+                <div class="track-item flex items-center justify-between p-3 rounded-lg hover:bg-white/5 transition-all group">
+                    <div class="flex items-center space-x-4">
+                        <div class="relative">
+                            <span class="text-gray-400 text-sm w-4 group-hover:opacity-0 transition-opacity">2</span>
+                            <button class="play-button absolute inset-0 w-8 h-8 bg-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all">
+                                <i class="bx bx-play text-black text-sm ml-0.5"></i>
+                            </button>
+                        </div>
+                        <img src="https://upload.wikimedia.org/wikipedia/en/a/ad/AM_%28Arctic_Monkeys_album%29_cover.jpg" 
+                             class="w-10 h-10 rounded" alt="AM">
+                        <div>
+                            <p class="font-medium">505</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <span class="stat-number font-bold">1,197,460,058</span>
+                        <button class="w-6 h-6 flex items-center justify-center text-gray-400 hover:text-white">
+                            <i class="fas fa-heart text-xs"></i>
+                        </button>
+                        <span class="text-gray-400 text-sm">4:13</span>
+                        <button class="w-6 h-6 flex items-center justify-center text-gray-400 hover:text-white">
+                            <i class="fas fa-ellipsis-h text-xs"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Track 3 -->
+                <div class="track-item flex items-center justify-between p-3 rounded-lg hover:bg-white/5 transition-all group">
+                    <div class="flex items-center space-x-4">
+                        <div class="relative">
+                            <span class="text-gray-400 text-sm w-4 group-hover:opacity-0 transition-opacity">3</span>
+                            <button class="play-button absolute inset-0 w-8 h-8 bg-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all">
+                                <i class="bx bx-play text-black text-sm ml-0.5"></i>
+                            </button>
+                        </div>
+                        <img src="https://upload.wikimedia.org/wikipedia/en/6/6d/FavouriteWorstNightmare.jpg" 
+                             class="w-10 h-10 rounded" alt="Favourite Worst Nightmare">
+                        <div>
+                            <p class="font-medium">No. 1 Party Anthem</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <span class="stat-number font-bold">686,511,409</span>
+                        <button class="w-6 h-6 flex items-center justify-center text-gray-400 hover:text-white">
+                            <i class="fas fa-heart text-xs"></i>
+                        </button>
+                        <span class="text-gray-400 text-sm">4:03</span>
+                        <button class="w-6 h-6 flex items-center justify-center text-gray-400 hover:text-white">
+                            <i class="fas fa-ellipsis-h text-xs"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Track 4 -->
+                <div class="track-item flex items-center justify-between p-3 rounded-lg hover:bg-white/5 transition-all group">
+                    <div class="flex items-center space-x-4">
+                        <div class="relative">
+                            <span class="text-gray-400 text-sm w-4 group-hover:opacity-0 transition-opacity">4</span>
+                            <button class="play-button absolute inset-0 w-8 h-8 bg-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all">
+                                <i class="bx bx-play text-black text-sm ml-0.5"></i>
+                            </button>
+                        </div>
+                        <img src="https://upload.wikimedia.org/wikipedia/en/a/ad/AM_%28Arctic_Monkeys_album%29_cover.jpg" 
+                             class="w-10 h-10 rounded" alt="AM">
+                        <div>
+                            <p class="font-medium">Do I Wanna Know?</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <span class="stat-number font-bold">2,669,077,541</span>
+                        <button class="w-6 h-6 flex items-center justify-center text-gray-400 hover:text-white">
+                            <i class="fas fa-heart text-xs"></i>
+                        </button>
+                        <span class="text-gray-400 text-sm">4:32</span>
+                        <button class="w-6 h-6 flex items-center justify-center text-gray-400 hover:text-white">
+                            <i class="fas fa-ellipsis-h text-xs"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Track 5 -->
+                <div class="track-item flex items-center justify-between p-3 rounded-lg hover:bg-white/5 transition-all group">
+                    <div class="flex items-center space-x-4">
+                        <div class="relative">
+                            <span class="text-gray-400 text-sm w-4 group-hover:opacity-0 transition-opacity">5</span>
+                            <button class="play-button absolute inset-0 w-8 h-8 bg-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all">
+                                <i class="bx bx-play text-black text-sm ml-0.5"></i>
+                            </button>
+                        </div>
+                        <img src="https://upload.wikimedia.org/wikipedia/en/a/ad/AM_%28Arctic_Monkeys_album%29_cover.jpg" 
+                             class="w-10 h-10 rounded" alt="AM">
+                        <div>
+                            <p class="font-medium">Why'd You Only Call Me When You're High?</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <span class="stat-number font-bold">1,127,994,259</span>
+                        <button class="w-6 h-6 flex items-center justify-center text-gray-400 hover:text-white">
+                            <i class="fas fa-heart text-xs"></i>
+                        </button>
+                        <span class="text-gray-400 text-sm">2:41</span>
+                        <button class="w-6 h-6 flex items-center justify-center text-gray-400 hover:text-white">
+                            <i class="fas fa-ellipsis-h text-xs"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Discography -->
+    <section class="py-12">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex items-center justify-between mb-8">
+                <h2 class="text-2xl font-bold">Discography</h2>
+                <button class="text-sm text-gray-400 hover:text-white transition-colors">Show all</button>
+            </div>
+
+            <!-- Filter Tabs -->
+            <div class="flex space-x-6 mb-8">
+                <button class="text-white font-medium border-b-2 border-pink-500 pb-2">Popular releases</button>
+                <button class="text-gray-400 hover:text-white transition-colors pb-2">Albums</button>
+                <button class="text-gray-400 hover:text-white transition-colors pb-2">Singles and EPs</button>
+            </div>
+
+            <!-- Albums Grid -->
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+                <!-- Album 1: AM -->
+                <div class="album-card bg-white/5 p-4 rounded-lg transition-all hover:bg-white/10 cursor-pointer">
+                    <img src="https://upload.wikimedia.org/wikipedia/en/a/ad/AM_%28Arctic_Monkeys_album%29_cover.jpg" 
+                         class="w-full aspect-square rounded-lg mb-4" alt="AM">
+                    <h3 class="font-semibold mb-1">AM</h3>
+                    <p class="text-sm text-gray-400">2013 • Album</p>
+                </div>
+
+                <!-- Album 2: Favourite Worst Nightmare -->
+                <div class="album-card bg-white/5 p-4 rounded-lg transition-all hover:bg-white/10 cursor-pointer">
+                    <img src="https://upload.wikimedia.org/wikipedia/en/6/6d/FavouriteWorstNightmare.jpg" 
+                         class="w-full aspect-square rounded-lg mb-4" alt="Favourite Worst Nightmare">
+                    <h3 class="font-semibold mb-1">Favourite Worst Nightmare</h3>
+                    <p class="text-sm text-gray-400">2007 • Album</p>
+                </div>
+
+                <!-- Album 3: Whatever People Say -->
+                <div class="album-card bg-white/5 p-4 rounded-lg transition-all hover:bg-white/10 cursor-pointer">
+                    <img src="https://upload.wikimedia.org/wikipedia/en/a/ad/Whatever_People_Say_I_Am%2C_That%27s_What_I%27m_Not.jpg" 
+                         class="w-full aspect-square rounded-lg mb-4" alt="Whatever People Say">
+                    <h3 class="font-semibold mb-1">Whatever People Say I Am, That's What I'm Not</h3>
+                    <p class="text-sm text-gray-400">2006 • Album</p>
+                </div>
+
+                <!-- Album 4: Humbug -->
+                <div class="album-card bg-white/5 p-4 rounded-lg transition-all hover:bg-white/10 cursor-pointer">
+                    <img src="https://upload.wikimedia.org/wikipedia/en/8/8e/Humbug_Arctic_Monkeys.png" 
+                         class="w-full aspect-square rounded-lg mb-4" alt="Humbug">
+                    <h3 class="font-semibold mb-1">Humbug</h3>
+                    <p class="text-sm text-gray-400">2009 • Album</p>
+                </div>
+
+                <!-- Album 5: Suck It and See -->
+                <div class="album-card bg-white/5 p-4 rounded-lg transition-all hover:bg-white/10 cursor-pointer">
+                    <img src="https://upload.wikimedia.org/wikipedia/en/c/c7/Suck_It_and_See.jpg" 
+                         class="w-full aspect-square rounded-lg mb-4" alt="Suck It and See">
+                    <h3 class="font-semibold mb-1">Suck It and See</h3>
+                    <p class="text-sm text-gray-400">2011 • Album</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About -->
+    <section class="py-12">
+        <div class="max-w-7xl mx-auto px-6">
+            <h2 class="text-2xl font-bold mb-8">About</h2>
+            
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?q=80&w=500&auto=format&fit=crop" 
+                         class="w-full rounded-lg" alt="Arctic Monkeys band photo">
+                </div>
+                
+                <div>
+                    <div class="flex items-center mb-6">
+                        <span class="stat-number text-4xl font-black mr-4">#44</span>
+                        <span class="text-lg">in the world</span>
+                    </div>
+                    
+                    <p class="text-gray-300 leading-relaxed mb-6">
+                        With their jerky and theatre-keen rock sound, Arctic Monkeys are an enigmatic, 
+                        guitar-driven band based in the good-quality British band. Although originally 
+                        from Sheffield, they first made their mark in London and have since become one 
+                        of the most influential rock acts of the 21st century.
+                    </p>
+                    
+                    <div class="text-gray-300">
+                        <p class="mb-2"><span class="stat-number font-bold">62.1M</span> monthly listeners</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Fans Also Like -->
+    <section class="py-12">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex items-center justify-between mb-8">
+                <h2 class="text-2xl font-bold">Fans also like</h2>
+                <button class="text-sm text-gray-400 hover:text-white transition-colors">Show all</button>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+                <!-- Artist 1: The Neighbourhood -->
+                <div class="fan-also-like-item text-center">
+                    <div class="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?q=80&w=150&auto=format&fit=crop" 
+                             class="w-full h-full object-cover" alt="The Neighbourhood">
+                    </div>
+                    <h3 class="font-semibold mb-1">The Neighbourhood</h3>
+                    <p class="text-sm text-gray-400">Artist</p>
+                </div>
+
+                <!-- Artist 2: Radiohead -->
+                <div class="fan-also-like-item text-center">
+                    <div class="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden bg-red-900 flex items-center justify-center">
+                        <span class="text-white font-bold text-lg">RAD<br>LAB</span>
+                    </div>
+                    <h3 class="font-semibold mb-1">Radiohead</h3>
+                    <p class="text-sm text-gray-400">Artist</p>
+                </div>
+
+                <!-- Artist 3: Tame Impala -->
+                <div class="fan-also-like-item text-center">
+                    <div class="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?q=80&w=150&auto=format&fit=crop" 
+                             class="w-full h-full object-cover" alt="Tame Impala">
+                    </div>
+                    <h3 class="font-semibold mb-1">Tame Impala</h3>
+                    <p class="text-sm text-gray-400">Artist</p>
+                </div>
+
+                <!-- Artist 4: Lana Del Rey -->
+                <div class="fan-also-like-item text-center">
+                    <div class="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?q=80&w=150&auto=format&fit=crop" 
+                             class="w-full h-full object-cover" alt="Lana Del Rey">
+                    </div>
+                    <h3 class="font-semibold mb-1">Lana Del Rey</h3>
+                    <p class="text-sm text-gray-400">Artist</p>
+                </div>
+
+                <!-- Artist 5: Gorillaz -->
+                <div class="fan-also-like-item text-center">
+                    <div class="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden bg-gray-800 flex items-center justify-center">
+                        <i class="fas fa-music text-4xl text-white"></i>
+                    </div>
+                    <h3 class="font-semibold mb-1">Gorillaz</h3>
+                    <p class="text-sm text-gray-400">Artist</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Music Player Bar -->
+    <div id="player-bar" class="fixed bottom-0 left-0 right-0 h-20 bg-black/90 backdrop-blur-lg border-t border-white/10 flex items-center px-6 z-50 transform translate-y-full transition-transform duration-300">
+        <div class="flex items-center space-x-4 flex-1">
+            <img id="player-album-art" src="" alt="Album Art" class="w-12 h-12 rounded">
+            <div class="flex-1">
+                <h4 id="player-song-title" class="text-sm font-medium truncate"></h4>
+                <p id="player-artist-album" class="text-xs text-gray-400 truncate"></p>
+            </div>
+            <button class="w-6 h-6 flex items-center justify-center text-gray-400 hover:text-white">
+                <i class="fas fa-heart text-xs"></i>
+            </button>
+        </div>
+        
+        <div class="flex-1 flex flex-col items-center justify-center max-w-md">
+            <div class="flex items-center space-x-4 text-gray-400 mb-2">
+                <button id="shuffle-btn" class="hover:text-white"><i class="bx bx-shuffle text-lg"></i></button>
+                <button id="prev-btn" class="hover:text-white"><i class="bx bx-skip-previous text-lg"></i></button>
+                <button id="play-pause-btn" class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-black hover:scale-105 transition-all">
+                    <i class="bx bx-play text-lg ml-0.5" id="play-pause-icon"></i>
+                </button>
+                <button id="next-btn" class="hover:text-white"><i class="bx bx-skip-next text-lg"></i></button>
+                <button id="repeat-btn" class="hover:text-white"><i class="bx bx-repeat text-lg"></i></button>
+            </div>
+            <div class="flex items-center w-full">
+                <span id="current-time" class="text-xs text-gray-400 mr-2">0:00</span>
+                <div class="flex-1 h-1 bg-gray-600 rounded-lg relative">
+                    <div id="progress-gradient" class="absolute h-full rounded-lg bg-white" style="width: 0%;"></div>
+                    <input type="range" id="progress-bar" value="0" min="0" max="100" class="w-full h-full absolute top-0 appearance-none bg-transparent cursor-pointer">
+                </div>
+                <span id="total-time" class="text-xs text-gray-400 ml-2">0:00</span>
+            </div>
+        </div>
+
+        <div class="flex items-center space-x-4 flex-1 justify-end">
+            <button id="volume-btn" class="hover:text-white"><i class="bx bx-volume-full text-lg" id="volume-icon"></i></button>
+            <input type="range" id="volume-bar" value="100" min="0" max="100" class="w-20 h-1 bg-gray-600 rounded-lg appearance-none cursor-pointer">
+            <button class="hover:text-white"><i class="fas fa-expand-alt text-sm"></i></button>
+        </div>
+
+        <audio id="audio-player" src=""></audio>
+    </div>
+
+    <script>
+        // Track data
+        const tracks = [
+            { title: "I Wanna Be Yours", artist: "Arctic Monkeys", album: "AM", duration: "3:03", src: 'audio/arctic-monkeys/i-wanna-be-yours.mp3', cover: 'https://upload.wikimedia.org/wikipedia/en/a/ad/AM_%28Arctic_Monkeys_album%29_cover.jpg' },
+            { title: "505", artist: "Arctic Monkeys", album: "Favourite Worst Nightmare", duration: "4:13", src: 'audio/arctic-monkeys/505.mp3', cover: 'https://upload.wikimedia.org/wikipedia/en/6/6d/FavouriteWorstNightmare.jpg' },
+            { title: "No. 1 Party Anthem", artist: "Arctic Monkeys", album: "AM", duration: "4:03", src: 'audio/arctic-monkeys/no1-party-anthem.mp3', cover: 'https://upload.wikimedia.org/wikipedia/en/a/ad/AM_%28Arctic_Monkeys_album%29_cover.jpg' },
+            { title: "Do I Wanna Know?", artist: "Arctic Monkeys", album: "AM", duration: "4:32", src: 'audio/arctic-monkeys/do-i-wanna-know.mp3', cover: 'https://upload.wikimedia.org/wikipedia/en/a/ad/AM_%28Arctic_Monkeys_album%29_cover.jpg' },
+            { title: "Why'd You Only Call Me When You're High?", artist: "Arctic Monkeys", album: "AM", duration: "2:41", src: 'audio/arctic-monkeys/why-only-call.mp3', cover: 'https://upload.wikimedia.org/wikipedia/en/a/ad/AM_%28Arctic_Monkeys_album%29_cover.jpg' }
+        ];
+
+        // Player elements
+        const playerBar = document.getElementById('player-bar');
+        const playerAlbumArt = document.getElementById('player-album-art');
+        const playerSongTitle = document.getElementById('player-song-title');
+        const playerArtistAlbum = document.getElementById('player-artist-album');
+        const playPauseBtn = document.getElementById('play-pause-btn');
+        const playPauseIcon = document.getElementById('play-pause-icon');
+        const progressBar = document.getElementById('progress-bar');
+        const progressGradient = document.getElementById('progress-gradient');
+        const currentTime = document.getElementById('current-time');
+        const totalTime = document.getElementById('total-time');
+        const volumeBar = document.getElementById('volume-bar');
+        const volumeIcon = document.getElementById('volume-icon');
+        const audio = document.getElementById('audio-player');
+
+        let currentTrackIndex = null;
+        let isPlaying = false;
+
+        // Play buttons functionality
+        const playButtons = document.querySelectorAll('.play-button');
+        const playAllBtn = document.getElementById('playAllBtn');
+
+        // Play All button
+        playAllBtn.addEventListener('click', () => {
+            playTrack(0);
+        });
+
+        // Individual play buttons
+        playButtons.forEach((button, index) => {
+            button.addEventListener('click', (e) => {
+                e.stopPropagation();
+                playTrack(index);
+            });
+        });
+
+        // Main play/pause button
+        playPauseBtn.addEventListener('click', () => {
+            if (currentTrackIndex === null) {
+                playTrack(0);
+            } else {
+                togglePlayPause();
+            }
+        });
+
+        // Navigation buttons
+        document.getElementById('prev-btn').addEventListener('click', () => {
+            if (currentTrackIndex > 0) {
+                playTrack(currentTrackIndex - 1);
+            }
+        });
+
+        document.getElementById('next-btn').addEventListener('click', () => {
+            if (currentTrackIndex < tracks.length - 1) {
+                playTrack(currentTrackIndex + 1);
+            }
+        });
+
+        // Play track function
+        function playTrack(index) {
+            currentTrackIndex = index;
+            const track = tracks[index];
+            
+            audio.src = track.src;
+            playerAlbumArt.src = track.cover;
+            playerSongTitle.textContent = track.title;
+            playerArtistAlbum.textContent = `${track.artist} • ${track.album}`;
+
+            audio.play().catch(err => console.error("Error playing:", err));
+            isPlaying = true;
+            updatePlayPauseButton();
+            showPlayerBar();
+        }
+
+        // Toggle play/pause
+        function togglePlayPause() {
+            if (isPlaying) {
+                audio.pause();
+                isPlaying = false;
+            } else {
+                audio.play().catch(err => console.error("Error playing:", err));
+                isPlaying = true;
+            }
+            updatePlayPauseButton();
+        }
+
+        // Update play/pause button
+        function updatePlayPauseButton() {
+            if (isPlaying) {
+                playPauseIcon.classList.remove('bx-play');
+                playPauseIcon.classList.add('bx-pause');
+            } else {
+                playPauseIcon.classList.remove('bx-pause');
+                playPauseIcon.classList.add('bx-play');
+            }
+        }
+
+        // Show player bar
+        function showPlayerBar() {
+            playerBar.classList.remove('translate-y-full');
+        }
+
+        // Progress bar functionality
+        audio.addEventListener('timeupdate', () => {
+            if (audio.duration) {
+                const progress = (audio.currentTime / audio.duration) * 100;
+                progressBar.value = progress;
+                progressGradient.style.width = `${progress}%`;
+                currentTime.textContent = formatTime(audio.currentTime);
+            }
+        });
+
+        audio.addEventListener('loadedmetadata', () => {
+            totalTime.textContent = formatTime(audio.duration);
+        });
+
+        progressBar.addEventListener('input', () => {
+            const seekTime = (progressBar.value / 100) * audio.duration;
+            audio.currentTime = seekTime;
+        });
+
+        // Volume control
+        volumeBar.addEventListener('input', () => {
+            audio.volume = volumeBar.value / 100;
+            updateVolumeIcon();
+        });
+
+        function updateVolumeIcon() {
+            if (audio.volume === 0) {
+                volumeIcon.className = 'bx bx-volume-mute text-lg';
+            } else if (audio.volume > 0 && audio.volume <= 0.5) {
+                volumeIcon.className = 'bx bx-volume-low text-lg';
+            } else {
+                volumeIcon.className = 'bx bx-volume-full text-lg';
+            }
+        }
+
+        // Format time helper
+        function formatTime(seconds) {
+            const minutes = Math.floor(seconds / 60);
+            const secs = Math.floor(seconds % 60).toString().padStart(2, '0');
+            return `${minutes}:${secs}`;
+        }
+
+        // Auto-play next track
+        audio.addEventListener('ended', () => {
+            if (currentTrackIndex < tracks.length - 1) {
+                playTrack(currentTrackIndex + 1);
+            } else {
+                isPlaying = false;
+                updatePlayPauseButton();
+            }
+        });
+
+        // Handle audio events
+        audio.addEventListener('play', () => {
+            isPlaying = true;
+            updatePlayPauseButton();
+        });
+
+        audio.addEventListener('pause', () => {
+            isPlaying = false;
+            updatePlayPauseButton();
+        });
+
+        // Shuffle and repeat functionality
+        document.getElementById('shuffle-btn').addEventListener('click', () => {
+            const randomIndex = Math.floor(Math.random() * tracks.length);
+            playTrack(randomIndex);
+        });
+
+        let repeatMode = false;
+        document.getElementById('repeat-btn').addEventListener('click', () => {
+            repeatMode = !repeatMode;
+            const repeatBtn = document.getElementById('repeat-btn');
+            if (repeatMode) {
+                repeatBtn.classList.add('text-pink-500');
+            } else {
+                repeatBtn.classList.remove('text-pink-500');
+            }
+        });
+
+        // Error handling
+        audio.addEventListener('error', () => {
+            console.error("Audio file not found:", audio.src);
+        });
+
+        // Album click handlers
+        document.querySelectorAll('.album-card').forEach((card, index) => {
+            card.addEventListener('click', () => {
+                // You could navigate to individual album pages here
+                console.log('Album clicked:', index);
+            });
+        });
+
+        // Track row click handlers
+        document.querySelectorAll('.track-item').forEach((item, index) => {
+            item.addEventListener('click', (e) => {
+                if (!e.target.closest('.play-button')) {
+                    playTrack(index);
+                }
+            });
+        });
+    </script>
+</body>
+</html>

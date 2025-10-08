@@ -1,0 +1,1780 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MELOVOID - Music Platform</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Roboto+Mono:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Reset + body */
+ body {
+            font-family: 'Orbitron', 'Roboto Mono', monospace, sans-serif;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            background-size: cover;
+            color: white;
+            overflow-x: hidden;
+        }
+
+        /* Background video - FIXED VERSION */
+        #bgVideo {
+            position: fixed;
+            right: 0;
+            bottom: 0;
+            min-width: 100%;
+            min-height: 100%;
+            object-fit: cover;
+            z-index: -1;
+            filter: brightness(0.85);
+        }
+
+ body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url("public/noise.webp") repeat;
+  opacity: 0.10;
+  pointer-events: none;
+  z-index: 1;
+}
+
+
+/* Hero Overlay */
+.hero-gradient::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: 
+    url("noise.png") repeat, /* النويز */
+    linear-gradient(
+      to bottom,
+      rgba(0,0,0,0) 0%,
+      
+      rgba(0,0,0,0.85) 80%,
+      rgba(15,14,14,1) 100%
+    ); /* التدريج */
+  background-blend-mode: multiply; /* يدمجهم مع بعض */
+  pointer-events: none;
+  z-index: 2;
+}
+
+
+/* Hero Content */
+.hero-gradient > * {
+  position: relative;
+  z-index: 3;
+}
+
+
+.navbar-scrolled {
+  background: rgba(0, 0, 0, 0.9); /* أسود شفاف */
+  backdrop-filter: blur(6px);     /* اختيارى يعمل بلور خفيف */
+  transition: background 0.3s ease;
+}
+
+/* Custom styles for the player bar to create a glass-black effect */
+.glass-black-effect {
+    backdrop-filter: blur(15px);
+    background-color: rgba(0, 0, 0, 0.4);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Styles for the sliders */
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 12px;
+  height: 12px;
+  background: #f97316; /* Tailwind orange-500 */
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 0 2px rgba(0,0,0,.5);
+}
+
+input[type="range"]::-moz-range-thumb {
+  width: 12px;
+  height: 12px;
+  background: #f97316; /* Tailwind orange-500 */
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+#progress-gradient {
+    background: linear-gradient(to right, #f97316, #ef4444);
+}
+       
+        .glass-effect {
+            background: rgba(255,255,255,0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .album-glow {
+            box-shadow: 0 0 40px rgba(70, 164, 142, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .album-glow:hover {
+            box-shadow: 0 0 60px #b84d01a7;
+            transform: scale(1.05);
+        }
+        
+        .carousel-container {
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .carousel-track {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+        
+        .carousel-slide {
+            min-width: 100%;
+            position: relative;
+        }
+        .arrow-left{
+            padding-left: 5rem;
+        }
+        
+         .noise-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.02'/%3E%3C/svg%3E");
+            pointer-events: none;
+        }
+
+        .noise-section {
+            position: relative;
+        }
+
+        .relative {
+            padding-right: 20px;
+        }
+
+        /* Our Bands Section */
+        .our-bands-section {
+            background: #000;
+            padding: 4rem 0;
+            position: relative;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            font-weight: 900;
+            letter-spacing: 0.3em;
+            text-align: left;
+            margin-bottom: 3rem;
+            margin-top: 3rem;
+            padding-left: 1.5rem;
+        }
+
+        .carousel-container {
+            position: relative;
+            overflow: hidden;
+            padding: 0 1.5rem;
+        }
+
+        .carousel-wrapper {
+            display: flex;
+            transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            cursor: grab;
+            user-select: none;
+        }
+
+        .carousel-wrapper:active {
+            cursor: grabbing;
+        }
+
+        .carousel-wrapper.dragging {
+            transition: none;
+        }
+
+        .band-card {
+            min-width: 400px;
+            height: 200px;
+            margin-right: 1.5rem;
+            position: relative;
+            border-radius: none;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+         .band-card {
+        position: relative;
+        width: 300px;
+        height: 200px;
+        overflow: hidden;
+        border-radius: 12px;
+        cursor: pointer;
+    }
+
+    .band-video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+    }
+
+    .band-overlay {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding: 10px;
+        background: linear-gradient(to top, rgba(0,0,0,0.7), rgba(0,0,0,0));
+        color: white;
+        text-align: center;
+    }
+
+        .band-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(255, 107, 0, 0.3);
+        }
+
+        .band-card:active {
+            transform: translateY(-6px) scale(1.01);
+        }
+
+        /* Band card image backgrounds */
+        .band-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            z-index: 1;
+        }
+
+        /* Default fallback backgrounds */
+        .band-card.uncaged {
+            background: linear-gradient(135deg, #2d1b69 0%, #11052c 100%);
+        }
+
+        .band-card.instinct {
+            background: radial-gradient(circle at center, #00ff88 0%, #004d2a 70%, #001a0f 100%);
+        }
+
+        .band-card.silk {
+            background: linear-gradient(135deg, #ff7b00 0%, #d2691e 50%, #8b4513 100%);
+        }
+
+        /* Custom background images when data-bg attribute is present */
+        .band-card[data-bg]::after {
+            background-image: var(--bg-image);
+        }
+
+        /* Animated pulse effect for instinct cards */
+        .band-card.instinct::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 120px;
+            height: 120px;
+            background: radial-gradient(circle, rgba(0, 255, 136, 0.8) 0%, rgba(0, 255, 136, 0.3) 40%, transparent 70%);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            animation: pulse 2s ease-in-out infinite;
+            z-index: 1;
+        }
+
+        @keyframes pulse {
+            0%, 100% { 
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 0.8;
+            }
+            50% { 
+                transform: translate(-50%, -50%) scale(1.2);
+                opacity: 0.4;
+            }
+        }
+        
+
+        .band-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+            z-index: 10;
+        }
+
+        .brand-name {
+            font-size: 1rem;
+            font-weight: 400;
+            letter-spacing: 0.2em;
+            margin-bottom: 0.5rem;
+            opacity: 0.9;
+        }
+
+        .band-name {
+            font-size: 2.5rem;
+            font-weight: 900;
+            letter-spacing: 0.1em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+        }
+
+        .band-name.instinct {
+            font-style: italic;
+            color: #00ff88;
+            text-shadow: 0 0 20px rgba(0, 255, 136, 0.5);
+        }
+
+        .band-name.silk {
+            font-style: italic;
+            color: #fff;
+        }
+
+        .band-name.uncaged {
+            color: #fff;
+        }
+
+        /* Navigation arrows */
+        .carousel-nav {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .nav-btn {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1.2rem;
+        }
+
+        .nav-btn:hover {
+            background: rgba(255, 107, 0, 0.8);
+            transform: scale(1.1);
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .section-title {
+                font-size: 2rem;
+                padding-left: 1rem;
+            }
+
+            .band-card {
+                min-width: 300px;
+                height: 160px;
+            }
+
+            .band-name {
+                font-size: 1.8rem;
+            }
+
+            .carousel-container {
+                padding: 0 1rem;
+            }
+        }
+        
+         /* Trending Albums Section */
+        .trending-albums-section {
+            background: #000;
+            padding: 4rem 0;
+            position: relative;
+        }
+
+        .max-w-7xl {
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        .px-6 {
+            padding-left: 1.5rem;
+            padding-right: 1.5rem;
+        }
+
+        .section-title {
+            font-size: 1.875rem;
+            font-weight: 700;
+            letter-spacing: 0.2em;
+            margin-bottom: 3rem;
+            text-transform: uppercase;
+            font-family: 'Orbitron', monospace;
+        }
+
+        @media (min-width: 768px) {
+            .section-title {
+                font-size: 2.25rem;
+            }
+        }
+
+        
+
+        @media (min-width: 768px) {
+            .albums-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .albums-grid {
+                grid-template-columns: repeat(6, 1fr);
+            }
+        }
+
+        .albums-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* كل كارت أكبر */
+    gap: 2rem; /* مسافة بين الكروت */
+}
+
+
+.title-divider {
+    width: 250px; 
+    height: 3px; 
+    margin-left: 20px;
+    background-image: linear-gradient(to right, #ff6e40, #ff9f40, rgba(255, 255, 255, 0)); /* A fading gradient */
+    border-radius: 5px; 
+}
+
+.trending-card {
+    text-align: center;
+    background: #000000;
+    padding: 20px;
+    transition: transform 0.3s ease;
+}
+
+.trending-card:hover {
+    transform: scale(1.05);
+}
+
+.album-image {
+    width: 90%;
+    height: 300px; /* 👈 خلي الطول أكبر */
+    object-fit: cover;
+    margin-bottom: 12px;
+}
+
+.album-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-top: 8px;
+}
+
+.artist-name {
+    font-size: 1rem;
+    color: #aaa;
+}
+
+        /* Responsive adjustments */
+        @media (max-width: 640px) {
+            .albums-grid {
+                gap: 1rem;
+            }
+            
+            .trending-card {
+                padding: 0.75rem;
+            }
+            
+            .album-title {
+                font-size: 0.75rem;
+            }
+            
+            .artist-name {
+                font-size: 0.675rem;
+            }
+        }
+        
+        .btn {
+            outline: none;
+            cursor: pointer;
+            border: none;
+            padding: 0.6rem 1.5rem;
+            margin: 0;
+            font-family: inherit;
+            font-size: inherit;
+            position: relative;
+            display: inline-block;
+            letter-spacing: 0.05rem;
+            font-weight: 700;
+            font-size: 14px;
+            border-radius: 500px;
+            overflow: hidden;
+            background: #3a7f6f;
+            color: ghostwhite;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            background: rgba(255, 107, 0, 0.8);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 107, 0, 0.8);
+        }
+        
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: #3a7f6f;
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: rgba(255,255,255,0.1);
+        }
+        
+        .animate-fade-in {
+            animation: fadeIn 0.8s ease-in-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+        
+        .pulse-animation {
+            animation: pulse 2s infinite;
+        }
+    </style>
+</head>
+
+<body class="text-white min-h-screen">
+   <audio id="ambient-music" loop autoplay muted preload="auto">
+    <source src="Minimal Piano No. 1, Venus.mp3" type="audio/mp3">
+    <source src="https://www.zapsplat.com/wp-content/uploads/2015/sound-effects-one/classical_music_peaceful_and_calm_001.mp3" type="audio/mpeg">
+    <source src="ambient-classical.mp3" type="audio/mpeg">
+</audio>
+    <!-- Single video element that will be randomly selected -->
+    <video autoplay muted loop id="bgVideo" preload="auto">
+        <!-- Source will be set dynamically by JavaScript -->
+    </video>
+    <nav class="fixed top-0 w-full z-50 p-6">
+    <div class="flex justify-between items-center max-w-7xl mx-auto">
+        <div class="flex items-center space-x-4">
+            <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center">
+                <i class="fas fa-music text-black text-sm"></i>
+            </div>
+            <span class="font-orbitron text-2xl tracking-wider">
+                MELO<b class="text-orange-500">VOID</b>
+            </span>
+        </div>
+        
+        <div class="hidden md:flex items-center space-x-8">
+            <a href="#" class="font-mono text-sm hover:text-orange-500 transition-colors">HOME</a>
+            <a href="#" class="font-mono text-sm hover:text-orange-500 transition-colors">ARTISTS</a>
+            <a href="#" class="font-mono text-sm hover:text-orange-500 transition-colors">ALBUMS</a>
+            <a href="#" class="font-mono text-sm hover:text-orange-500 transition-colors">PLAYLISTS</a>
+        </div>
+        
+        <div class="hidden md:flex items-center space-x-3">
+            <a href="#" class="w-8 h-8 glass-effect rounded-full flex items-center justify-center hover:bg-orange-500 transition-all">
+                <i class="fab fa-spotify text-xs"></i>
+            </a>
+            <a href="#" class="w-8 h-8 glass-effect rounded-full flex items-center justify-center hover:bg-orange-500 transition-all">
+                <i class="fab fa-apple text-xs"></i>
+            </a>
+            <a href="#" class="w-8 h-8 glass-effect rounded-full flex items-center justify-center hover:bg-orange-500 transition-all">
+                <i class="fab fa-youtube text-xs"></i>
+            </a>
+            <a href="#" class="w-8 h-8 glass-effect rounded-full flex items-center justify-center hover:bg-orange-500 transition-all">
+                <i class="fab fa-instagram text-xs"></i>
+            </a>
+        </div>
+        
+        <button id="menu-toggle" class="md:hidden focus:outline-none">
+            <i class="fas fa-bars text-white text-xl"></i>
+        </button>
+    </div>
+</nav>
+
+<div id="mobile-menu" class="fixed top-0 bottom-0 left-0 w-1/2 transform -translate-x-full transition-transform duration-300 ease-in-out bg-black p-6 z-40">
+    <div class="flex flex-col items-start space-y-8 mt-24">
+        <a href="homepage.html" class="font-mono text-xl hover:text-orange-500 transition-colors">HOME</a>
+        <a href="#" class="font-mono text-xl hover:text-orange-500 transition-colors">ARTISTS</a>
+        <a href="#" class="font-mono text-xl hover:text-orange-500 transition-colors">ALBUMS</a>
+        <a href="#" class="font-mono text-xl hover:text-orange-500 transition-colors">PLAYLISTS</a>
+    </div>
+
+    <div class="flex items-center space-x-3 mt-8">
+        <a href="#" class="w-8 h-8 glass-effect rounded-full flex items-center justify-center hover:bg-orange-500 transition-all">
+            <i class="fab fa-spotify text-xs"></i>
+        </a>
+        <a href="#" class="w-8 h-8 glass-effect rounded-full flex items-center justify-center hover:bg-orange-500 transition-all">
+            <i class="fab fa-apple text-xs"></i>
+        </a>
+        <a href="#" class="w-8 h-8 glass-effect rounded-full flex items-center justify-center hover:bg-orange-500 transition-all">
+            <i class="fab fa-youtube text-xs"></i>
+        </a>
+        <a href="#" class="w-8 h-8 glass-effect rounded-full flex items-center justify-center hover:bg-orange-500 transition-all">
+            <i class="fab fa-instagram text-xs"></i>
+        </a>
+    </div>
+</div>
+
+    <!-- Hero Carousel Section -->
+    <section class="relative min-h-screen hero-gradient flex items-center">
+        <div class="w-full">
+            <div class="carousel-container max-w-7xl mx-auto px-6 py-20 pt-32">
+                <div class="carousel-track" id="albumCarousel">
+                    <!-- Radiohead - OK Computer -->
+                    <div class="carousel-slide">
+                        <div class="grid md:grid-cols-2 gap-12 items-center">
+                            <div class="flex justify-center md:justify-start animate-fade-in">
+                               <div class="relative left-0 md:left-40">
+                                    <img src="public/OK_Computer.jpg" 
+                                        alt="OK Computer" 
+                                        class="w-80 h-80 md:w-96 md:h-96 album-glow">
+                                    
+                                    <div class="absolute bottom-4 left-4 glass-effect px-3 py-1 rounded">
+                                        <div class="flex items-center space-x-2 text-xs">
+                                            <div class="w-4 h-4 bg-white rounded flex items-center justify-center">
+                                                <i class="fas fa-music text-black text-xs"></i>
+                                            </div>
+                                            <span class="font-mono">radiohead</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="text-center md:text-left space-y-6 animate-fade-in">
+                                <div>
+                                    <h1 class="text-4xl md:text-6xl font-orbitron font-black uppercase tracking-widest mb-2" style="-webkit-text-stroke: 1px rgba(255,255,255,0.8); color: transparent;">
+                                        OK COMPUTER
+                                    </h1>
+                                    <h2 class="text-2xl md:text-4xl font-orbitron font-bold uppercase tracking-wide text-white">
+                                        RADIOHEAD
+                                    </h2>
+                                    <p class="text-gray-400 font-mono text-sm mt-2">Released June 16, 1997</p>
+                                </div>
+                                
+                                <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+                                    <a href="Melovoid.html" class="btn bg-green-500 text-white font-bold py-2 px-6 rounded-full hover:bg-orange-500 transition-all duration-300">
+                                        <i class="fas fa-eye mr-2"></i>
+                                        View Album
+                                    </a>
+                                    <button class="btn" style="background: transparent; border: 1px solid white;">
+                                        <i class="mr-2"></i>
+                                        Listen On Player
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- The Smiths -->
+                    <div class="carousel-slide">
+                        <div class="grid md:grid-cols-2 gap-12 items-center">
+                            <div class="flex justify-center md:justify-start animate-fade-in">
+                                <div class="relative left-0 md:left-40">
+                                    <img src="public/Smiths.webp" 
+                                         alt="The Queen Is Dead" 
+                                         class="w-80 h-80 md:w-96 md:h-96  album-glow">
+                                    
+                                    <div class="absolute bottom-4 left-4 glass-effect px-3 py-1 rounded">
+                                        <div class="flex items-center space-x-2 text-xs">
+                                            <div class="w-4 h-4 bg-white rounded flex items-center justify-center">
+                                                <i class="fas fa-music text-black text-xs"></i>
+                                            </div>
+                                            <span class="font-mono">the smiths</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="text-center md:text-left space-y-6 animate-fade-in">
+                                <div>
+                                    <h1 class="text-4xl md:text-6xl font-orbitron font-black uppercase tracking-widest mb-2" style="-webkit-text-stroke: 1px rgba(255,255,255,0.8); color: transparent;">
+                                        THE QUEEN IS DEAD
+                                    </h1>
+                                    <h2 class="text-2xl md:text-4xl font-orbitron font-bold uppercase tracking-wide text-white">
+                                        THE SMITHS
+                                    </h2>
+                                    <p class="text-gray-400 font-mono text-sm mt-2">Released June 16, 1986</p>
+                                </div>
+                                
+                                 <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+                                    <a href="THE QUEEN IS DEAD.html" class="btn bg-green-500 text-white font-bold py-2 px-6 rounded-full hover:bg-orange-500 transition-all duration-300">
+                                        <i class="fas fa-eye mr-2"></i>
+                                        View Album
+                                    </a>
+                                    <button class="btn" style="background: transparent; border: 1px solid white;">
+                                        <i class="mr-2"></i>
+                                        Listen On Player
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Arctic Monkeys -->
+                    <div class="carousel-slide">
+                        <div class="grid md:grid-cols-2 gap-12 items-center">
+                            <div class="flex justify-center md:justify-start animate-fade-in">
+                                <div class="relative left-0 md:left-40">
+                                    <img src="public/AM.jpg" 
+                                         alt="AM" 
+                                         class="w-80 h-80 md:w-96 md:h-96  album-glow">
+                                    
+                                    <div class="absolute bottom-4 left-4 glass-effect px-3 py-1 rounded">
+                                        <div class="flex items-center space-x-2 text-xs">
+                                            <div class="w-4 h-4 bg-white rounded flex items-center justify-center">
+                                                <i class="fas fa-music text-black text-xs"></i>
+                                            </div>
+                                            <span class="font-mono">arctic monkeys</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="text-center md:text-left space-y-6 animate-fade-in">
+                                <div>
+                                    <h1 class="text-4xl md:text-6xl font-orbitron font-black uppercase tracking-widest mb-2" style="-webkit-text-stroke: 1px rgba(255,255,255,0.8); color: transparent;">
+                                        AM
+                                    </h1>
+                                    <h2 class="text-2xl md:text-4xl font-orbitron font-bold uppercase tracking-wide text-white">
+                                        ARCTIC MONKEYS
+                                    </h2>
+                                    <p class="text-gray-400 font-mono text-sm mt-2">Released September 9, 2013</p>
+                                </div>
+                                
+                                <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+                                    <a href="Am Arctic monkeys.html" class="btn bg-green-500 text-white font-bold py-2 px-6 rounded-full hover:bg-orange-500 transition-all duration-300">
+                                        <i class="fas fa-eye mr-2"></i>
+                                        View Album
+                                    </a>
+                                    <button class="btn" style="background: transparent; border: 1px solid white;">
+                                        <i class="mr-2"></i>
+                                        Listen On Player
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Nirvana -->
+                    <div class="carousel-slide">
+                        <div class="grid md:grid-cols-2 gap-12 items-center">
+                            <div class="flex justify-center md:justify-start animate-fade-in">
+                                <div class="relative left-0 md:left-40">
+                                    <img src="public/nevermind.jpg" 
+                                         alt="Nevermind" 
+                                         class="w-80 h-80 md:w-96 md:h-96  album-glow">
+                                    
+                                    <div class="absolute bottom-4 left-4 glass-effect px-3 py-1 rounded">
+                                        <div class="flex items-center space-x-2 text-xs">
+                                            <div class="w-4 h-4 bg-white rounded flex items-center justify-center">
+                                                <i class="fas fa-music text-black text-xs"></i>
+                                            </div>
+                                            <span class="font-mono">nirvana</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="text-center md:text-left space-y-6 animate-fade-in">
+                                <div>
+                                    <h1 class="text-4xl md:text-6xl font-orbitron font-black uppercase tracking-widest mb-2" style="-webkit-text-stroke: 1px rgba(255,255,255,0.8); color: transparent;">
+                                        NEVERMIND
+                                    </h1>
+                                    <h2 class="text-2xl md:text-4xl font-orbitron font-bold uppercase tracking-wide text-white">
+                                        NIRVANA
+                                    </h2>
+                                    <p class="text-gray-400 font-mono text-sm mt-2">Released September 24, 1991</p>
+                                </div>
+                                
+                                 <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+                                    <a href="Nevermind Nirvana.html" class="btn bg-green-500 text-white font-bold py-2 px-6 rounded-full hover:bg-orange-500 transition-all duration-300">
+                                        <i class="fas fa-eye mr-2"></i>
+                                        View Album
+                                    </a>
+                                    <button class="btn" style="background: transparent; border: 1px solid white;">
+                                        <i class=" mr-2"></i>
+                                       Listen On Player
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Carousel Navigation -->
+                <div class="flex justify-center mt-8 space-x-2 bottom-20">
+                    <button class="carousel-dot w-3 h-3 rounded-full bg-white bg-opacity-50 transition-all" data-slide="0"></button>
+                    <button class="carousel-dot w-3 h-3 rounded-full bg-white bg-opacity-50 transition-all" data-slide="1"></button>
+                    <button class="carousel-dot w-3 h-3 rounded-full bg-white bg-opacity-50 transition-all" data-slide="2"></button>
+                    <button class="carousel-dot w-3 h-3 rounded-full bg-white bg-opacity-50 transition-all" data-slide="3"></button>
+                </div>
+
+                <!-- Carousel Arrows -->
+                <button class="absolute left-1 top-1/2 transform -translate-y-1/2 w-12 h-12 glass-effect rounded-full flex items-center justify-center hover:bg-orange-500 transition-all " id="prevSlide">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="absolute right-1 top-1/2 transform -translate-y-1/2 w-12 h-12 glass-effect rounded-full flex items-center justify-center hover:bg-orange-500 transition-all" id="nextSlide">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+     <!-- Our Bands Section -->
+<section class="bg-black py-16 noise-section">
+    <div class="max-w-7xl mx-auto px-6">
+        <h2 class="section-title text-3xl md:text-4xl font-orbitron font-bold uppercase tracking-widest mb-2">
+            Our Bands
+        </h2>
+        <div class="title-divider mb-12"></div>
+        
+        <div class="carousel-container">
+            <div class="carousel-wrapper" id="bandsCarousel">
+
+                <!-- Radiohead -->
+                <a href="radiohead.html" class="band-link">
+                    <div class="band-card uncaged">
+                        <video class="band-video" muted preload="metadata">
+                            <source src="public/loop-silk.webm" type="video/webm">
+                        </video>
+                        <div class="band-overlay">
+                            <div class="brand-name">MELOVOID</div>
+                            <div class="band-name uncaged">Radiohead</div>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- CAS -->
+                <a href="cas.html" class="band-link">
+                    <div class="band-card uncaged">
+                        <video class="band-video" muted preload="metadata">
+                            <source src="public/cas2.mp4" type="video/mp4">
+                        </video>
+                        <div class="band-overlay">
+                            <div class="brand-name">MELOVOID</div>
+                            <div class="band-name uncaged">CAS</div>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Arctic Monkeys -->
+                <a href="arctic-monkeys.html" class="band-link">
+                    <div class="band-card silk">
+                        <video class="band-video" muted preload="metadata">
+                            <source src="public/loop-instinct.webm" type="video/webm">
+                        </video>
+                        <div class="band-overlay">
+                            <div class="brand-name">melovoid</div>
+                            <div class="band-name silk">Arctic Monkeys</div>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Coldplay -->
+                <a href="coldplay.html" class="band-link">
+                    <div class="band-card uncaged">
+                        <video class="band-video" muted preload="metadata">
+                            <source src="public/13202035_3840_2160_24fps.mp4" type="video/mp4">
+                        </video>
+                        <div class="band-overlay">
+                            <div class="brand-name">melovoid</div>
+                            <div class="band-name uncaged">Coldplay</div>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- The Smiths -->
+                <a href="the-smiths.html" class="band-link">
+                    <div class="band-card uncaged">
+                        <video class="band-video" muted loop preload="metadata">
+                            <source src="public/the.mp4" type="video/mp4">
+                        </video>
+                        <div class="band-overlay">
+                            <div class="brand-name">melovoid</div>
+                            <div class="band-name uncaged">The Smiths</div>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Nirvana -->
+                <a href="nirvana.html" class="band-link">
+                    <div class="band-card uncaged">
+                        <video class="band-video" muted loop preload="metadata">
+                            <source src="public/4201700-hd_1080_1920_30fps.mp4" type="video/mp4">
+                        </video>
+                        <div class="band-overlay">
+                            <div class="brand-name">melovoid</div>
+                            <div class="band-name uncaged">Nirvana</div>
+                        </div>
+                    </div>
+                </a>
+
+            </div>
+        </div>
+    </div>  
+            <div class="carousel-nav">
+                <button class="nav-btn" id="prevBands">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="nav-btn" id="nextBands">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</section>
+   <!-- Trending Songs Section -->
+<section class="bg-black py-16 noise-section">
+   <div class="max-w-7xl mx-auto px-6">
+        <h2 class="section-title text-3xl md:text-4xl font-orbitron font-bold uppercase tracking-widest mb-2">
+            Trending Songs
+        </h2>
+        <div class="title-divider mb-12"></div>
+       
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+            <!-- Cry -->
+            <div class="trending-card p-4 rounded-lg flex items-center space-x-4 cursor-pointer">
+                <img src="public/cry.webp" class="w-16 h-16 rounded-lg">
+                <div class="flex-1">
+                    <h4 class="font-orbitron font-bold">Cry</h4>
+                    <p class="text-gray-400 text-sm font-mono">CAS • Cry</p>
+                </div>
+                <button class="play-button w-10 h-10 glass-effect rounded-full flex items-center justify-center hover:bg-orange-500 transition-all" data-song-src="public/Cry.mp3" data-state="play">
+                    <i class="bx bx-play text-sm"></i>
+                </button>
+            </div>
+
+            <!-- There Is A Light That Never Goes Out -->
+            <div class="trending-card p-4 rounded-lg flex items-center space-x-4 cursor-pointer">
+                <img src="public/There_is_a_Light_That_Never_Goes_Out_Neon_Sign_U705_3bbdd44f-b8e1-4d50-a996-3a3f0d460a21.webp" class="w-16 h-16 rounded-lg">
+                <div class="flex-1">
+                    <h4 class="font-orbitron font-bold">There Is A Light That Never Goes Out</h4>
+                    <p class="text-gray-400 text-sm font-mono">The Smiths • The Queen Is Dead</p>
+                </div>
+                <button class="play-button w-10 h-10 glass-effect rounded-full flex items-center justify-center hover:bg-orange-500 transition-all" data-song-src="public/There is a light that never goes out.mp3" data-state="play">
+                    <i class="bx bx-play text-sm"></i>
+                </button>
+            </div>
+
+            <!-- Sweater Weather -->
+            <div class="trending-card p-4 rounded-lg flex items-center space-x-4 cursor-pointer">
+                <img src="public/sweater.jpg" class="w-16 h-16 rounded-lg">
+                <div class="flex-1">
+                    <h4 class="font-orbitron font-bold">Sweater Weather</h4>
+                    <p class="text-gray-400 text-sm font-mono">The Neighbourhood • I Love You.</p>
+                </div>
+                <button class="play-button w-10 h-10 glass-effect rounded-full flex items-center justify-center hover:bg-orange-500 transition-all" data-song-src="public/Sweater Weather.mp3" data-state="play">
+                    <i class="bx bx-play text-sm"></i>
+                </button>
+            </div>
+
+            <!-- Creep -->
+            <div class="trending-card p-4 rounded-lg flex items-center space-x-4 cursor-pointer">
+                <img src="public/creep.jpg" class="w-16 h-16 rounded-lg">
+                <div class="flex-1">
+                    <h4 class="font-orbitron font-bold">Creep</h4>
+                    <p class="text-gray-400 text-sm font-mono">Radiohead • Pablo Honey</p>
+                </div>
+                <button class="play-button w-10 h-10 glass-effect rounded-full flex items-center justify-center hover:bg-orange-500 transition-all" data-song-src="public/creep - radio head.mp3" data-state="play">
+                    <i class="bx bx-play text-sm"></i>
+                </button>
+            </div>
+
+            <!-- R U Mine? -->
+            <div class="trending-card p-4 rounded-lg flex items-center space-x-4 cursor-pointer">
+                <img src="public/are you mine.jpg" class="w-16 h-16 rounded-lg">
+                <div class="flex-1">
+                    <h4 class="font-orbitron font-bold">R U Mine?</h4>
+                    <p class="text-gray-400 text-sm font-mono">Arctic Monkeys • AM</p>
+                </div>
+                <button class="play-button w-10 h-10 glass-effect rounded-full flex items-center justify-center hover:bg-orange-500 transition-all" data-song-src="public/R U Mine-arctic monkeys.mp3" data-state="play">
+                    <i class="bx bx-play text-sm"></i>
+                </button>
+            </div>
+
+            <!-- Come As You Are -->
+            <div class="trending-card p-4 rounded-lg flex items-center space-x-4 cursor-pointer">
+                <img src="public/come as you are.jpg" class="w-16 h-16 rounded-lg">
+                <div class="flex-1">
+                    <h4 class="font-orbitron font-bold">Come As You Are</h4>
+                    <p class="text-gray-400 text-sm font-mono">Nirvana • Nevermind</p>
+                </div>
+                <button class="play-button w-10 h-10 glass-effect rounded-full flex items-center justify-center hover:bg-orange-500 transition-all" data-song-src="public/01. Come As You Are.mp3" data-state="play">
+                    <i class="bx bx-play text-sm"></i>
+                </button>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+<div id="player-bar" class="fixed bottom-0 left-0 right-0 h-32 md:h-20 glass-black-effect flex flex-col md:flex-row items-center px-4 md:px-8 z-50 transform translate-y-full transition-transform duration-300">
+    <button id="exit-btn" class="absolute top-2 right-4 text-white text-3xl md:hidden">
+        <i class='bx bx-x'></i>
+    </button>
+    
+    <div class="flex-shrink-0 flex items-center space-x-4 w-full md:w-1/4 mb-2 md:mb-0">
+        <img id="player-album-art" src="" alt="Album Art" class="w-12 h-12 rounded-md">
+        <div class="flex-1">
+            <h4 id="player-song-title" class="text-sm font-bold truncate"></h4>
+            <p id="player-artist-album" class="text-xs text-gray-400 truncate"></p>
+        </div>
+    </div>
+    
+    <div class="flex-1 flex flex-col items-center justify-center w-full">
+        <div class="flex items-center space-x-4 text-white">
+            <button id="shuffle-btn" class="player-control-btn"><i class='bx bx-shuffle text-xl'></i></button>
+            <button id="prev-btn" class="player-control-btn"><i class='bx bx-skip-previous text-xl'></i></button>
+            <button id="play-pause-btn" class="w-12 h-12 rounded-full bg-white text-black flex items-center justify-center text-xl hover:bg-orange-500 hover:text-white transition-colors"><i class='bx bx-play' id="play-pause-icon"></i></button>
+            <button id="next-btn" class="player-control-btn"><i class='bx bx-skip-next text-xl'></i></button>
+            <button id="repeat-btn" class="player-control-btn"><i class='bx bx-repeat text-xl'></i></button>
+        </div>
+
+        <div class="flex items-center w-full mt-2">
+            <span id="current-time" class="text-xs text-gray-400 mr-2">0:00</span>
+            <div class="flex-1 h-1 bg-gray-600 rounded-lg relative">
+                <div id="progress-gradient" class="absolute h-full rounded-lg" style="width: 0%;"></div>
+                <input type="range" id="progress-bar" value="0" min="0" max="100" class="flex-1 h-full absolute w-full top-0 appearance-none bg-transparent cursor-pointer">
+            </div>
+            <span id="total-time" class="text-xs text-gray-400 ml-2">0:00</span>
+        </div>
+    </div>
+
+    <div class="flex-shrink-0 flex items-center justify-end space-x-4 w-full md:w-1/4 mt-2 md:mt-0">
+        <button id="volume-btn" class="player-control-btn"><i class='bx bx-volume-full text-xl' id="volume-icon"></i></button>
+        <input type="range" id="volume-bar" value="100" min="0" max="100" class="w-20 h-1 bg-gray-600 rounded-lg appearance-none cursor-pointer">
+        <button id="expand-btn" class="player-control-btn"><i class='bx bx-expand-alt text-xl'></i></button>
+    </div>
+
+    <audio id="audio-player" src=""></audio>
+</div>
+
+<!-- Expanded Player (Spotify style) -->
+<div id="expanded-player" class="hidden fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-70">
+    <div class="w-4/5 h-3/4 bg-[#121212] rounded-2xl shadow-2xl flex overflow-hidden">
+        
+        <!-- Left Sidebar -->
+        <div class="w-1/3 bg-[#000] border-r border-gray-800 p-6 overflow-y-auto">
+            <h2 class="text-white font-bold text-xl mb-6">Your Library</h2>
+            <ul class="space-y-4 text-gray-300 font-medium">
+                <li class="hover:text-white cursor-pointer">❤️ Liked Songs</li>
+                <li class="hover:text-white cursor-pointer">Sad Songs</li>
+                <li class="hover:text-white cursor-pointer">Indie Vibes</li>
+                <li class="hover:text-white cursor-pointer">It tastes like feet</li>
+            </ul>
+        </div>
+
+        <!-- Right Side: Lyrics -->
+        <div class="flex-1 p-10 flex flex-col overflow-y-auto">
+            <h2 class="text-white text-2xl font-bold mb-6">Lyrics</h2>
+            <div id="lyrics-content" class="text-gray-100 text-lg leading-8 whitespace-pre-line">
+It's making you cry every time
+You give your love to me this way
+Sayin' you'd wait for me to stay
+I know it hurts you
+But I need to tell you something
+My heart just can't be faithful for long
+I swear I'll only make you cry
+Maybe I'd change for you someday
+But I can't help the way I feel
+            </div>
+        </div>
+    </div>
+
+    <!-- Close Btn -->
+    <button id="close-expanded" class="absolute top-6 right-8 text-white text-3xl hover:text-gray-400">
+        <i class='bx bx-x'></i>
+    </button>
+</div>
+
+
+    <!-- Trending Albums Section -->
+    <section class="bg-black py-16 noise-section">
+   <div class="max-w-7xl mx-auto px-6">
+        <h2 class="section-title text-3xl md:text-4xl font-orbitron font-bold uppercase tracking-widest mb-2">
+            Trending Albums
+        </h2>
+        <div class="title-divider mb-12"></div>
+            <div class="albums-grid">
+                 <a href="Hail to the Thief.html">
+                <div class="trending-card">
+                    <img src="public/hail_to_the_thief_by_nobodyy.jpg"
+                         class="album-image " alt="OK Computer">
+                    <h4 class="album-title">Hail to the Thief</h4>
+                    <p class="artist-name">Radiohead</p>
+                </div>
+                </a>
+                
+                 <a href="Favourite Worst Nightmare.html">
+                <div class="trending-card">
+                    <img src="public/favourite-worst-nightmare-album.jpg"
+                         class="album-image " alt="Favourite Worst Nightmare">
+                    <h4 class="album-title">Favourite Worst Nightmare</h4>
+                    <p class="artist-name">Arctic Monkeys</p>
+                </div>
+                </a>
+                <a href="parachutes.html">
+                <div class="trending-card">
+                    <img src="public/parachutes.jpg"
+                         class="album-image " alt="Nevermind">
+                    <h4 class="album-title">Parachutes</h4>
+                    <p class="artist-name">Coldplay</p>
+                </div>
+                </a>
+                 <a href="Hatful of Hollow.html">
+                <div class="trending-card">
+                    <img src="public/12290-0-medium.jpg"
+                         class="album-image" alt="The Queen Is Dead">
+                    <h4 class="album-title"> Hatful of Hollow</h4>
+                    <p class="artist-name">The Smiths</p>
+                </div>
+                </a>
+                
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-[#0f0e0e] py-12 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center space-x-4 mb-4">
+                        <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center">
+                            <i class="fas fa-music text-black text-sm"></i>
+                        </div>
+                        <span class="font-orbitron text-xl tracking-wider">
+                          MELO<b class="text-orange-500">VOID</b>
+                        </span>
+                    </div>
+                    <p class="text-gray-400 text-sm font-mono">Discover the best music from legendary bands and emerging artists.</p>
+                </div>
+
+                <div>
+                    <h4 class="font-orbitron font-bold mb-4">Artists</h4>
+                    <ul class="space-y-2 text-sm font-mono text-gray-400">
+                        <li><a href="#" class="hover:text-orange-500 transition-colors">Radiohead</a></li>
+                        <li><a href="#" class="hover:text-orange-500 transition-colors">Arctic Monkeys</a></li>
+                        <li><a href="#" class="hover:text-orange-500 transition-colors">The Smiths</a></li>
+                        <li><a href="#" class="hover:text-orange-500 transition-colors">Nirvana</a></li>
+                        <li><a href="#" class="hover:text-orange-500 transition-colors">The Neighbourhood</a></li>
+                        <li><a href="#" class="hover:text-orange-500 transition-colors">CAS</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-orbitron font-bold mb-4">Platform</h4>
+                    <ul class="space-y-2 text-sm font-mono text-gray-400">
+                        <li><a href="#" class="hover:text-orange-500 transition-colors">Browse</a></li>
+                        <li><a href="#" class="hover:text-orange-500 transition-colors">Playlists</a></li>
+                        <li><a href="#" class="hover:text-orange-500 transition-colors">New Releases</a></li>
+                        <li><a href="#" class="hover:text-orange-500 transition-colors">Charts</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-orbitron font-bold mb-4">Connect</h4>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 glass-effect rounded-full flex items-center justify-center hover:bg-orange-500 transition-all">
+                            <i class="fab fa-spotify text-sm"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 glass-effect rounded-full flex items-center justify-center hover:bg-orange-500 transition-all">
+                            <i class="fab fa-apple text-sm"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 glass-effect rounded-full flex items-center justify-center hover:bg-orange-500 transition-all">
+                            <i class="fab fa-youtube text-sm"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 glass-effect rounded-full flex items-center justify-center hover:bg-orange-500 transition-all">
+                            <i class="fab fa-instagram text-sm"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-800 mt-8 pt-8">
+                <div class="flex flex-col md:flex-row justify-between items-center text-sm text-gray-400 font-mono">
+                    <div class="mb-4 md:mb-0">
+                        <p>© 2025 MELOVOID. All Rights Reserved</p>
+                    </div>
+                    <div class="flex space-x-6">
+                        <a href="#" class="hover:text-orange-500 transition-colors">Privacy</a>
+                        <a href="#" class="hover:text-orange-500 transition-colors">Terms</a>
+                        <a href="#" class="hover:text-orange-500 transition-colors">Support</a>
+                        <a href="#" class="hover:text-orange-500 transition-colors">About</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </footer>
+
+    <script>
+        // Album Carousel Functionality
+        let currentSlide = 0;
+        const totalSlides = 4;
+        const carouselTrack = document.getElementById('albumCarousel');
+        const carouselDots = document.querySelectorAll('.carousel-dot');
+        const prevButton = document.getElementById('prevSlide');
+        const nextButton = document.getElementById('nextSlide');
+
+        function updateCarousel() {
+            const offset = -currentSlide * 100;
+            carouselTrack.style.transform = `translateX(${offset}%)`;
+            
+            carouselDots.forEach((dot, index) => {
+                if (index === currentSlide) {
+                    dot.classList.add('bg-orange-500');
+                    dot.classList.remove('bg-opacity-50');
+                } else {
+                    dot.classList.remove('bg-orange-500');
+                    dot.classList.add('bg-opacity-50');
+                }
+            });
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            updateCarousel();
+        }
+
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+            updateCarousel();
+        }
+
+        // Event listeners
+        nextButton.addEventListener('click', nextSlide);
+        prevButton.addEventListener('click', prevSlide);
+
+        carouselDots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                currentSlide = index;
+                updateCarousel();
+            });
+        });
+
+        // Auto-play carousel
+        setInterval(nextSlide, 5000);
+
+        // Initialize
+        updateCarousel();
+
+        // Bands Carousel Functionality
+        let currentBandsSlide = 0;
+        const bandsCarousel = document.getElementById('bandsCarousel');
+        const prevBandsButton = document.getElementById('prevBands');
+        const nextBandsButton = document.getElementById('nextBands');
+
+        function updateBandsCarousel() {
+            const offset = -currentBandsSlide * 100;
+            bandsCarousel.style.transform = `translateX(${offset}%)`;
+        }
+
+        function nextBands() {
+            currentBandsSlide = currentBandsSlide === 1 ? 0 : 1;
+            updateBandsCarousel();
+        }
+
+        function prevBands() {
+            currentBandsSlide = currentBandsSlide === 0 ? 1 : 0;
+            updateBandsCarousel();
+        }
+
+        prevBandsButton.addEventListener('click', prevBands);
+        nextBandsButton.addEventListener('click', nextBands);
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Add play functionality for trending songs
+        document.querySelectorAll('.trending-card button').forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.stopPropagation();
+                
+                // Remove playing state from all buttons
+                document.querySelectorAll('.trending-card button i').forEach(icon => {
+                    icon.className = 'bx bx-play text-sm';
+                });
+                
+                // Toggle play/pause for clicked button
+                const icon = this.querySelector('i');
+                if (icon.classList.contains('bx-play')) {
+                    icon.className = 'bx bx-pause text-sm';
+                    console.log('Playing song...');
+                } else {
+                    icon.className = 'bx bx-play text-sm';
+                    console.log('Pausing song...');
+                }
+            });
+        });
+
+        // Add click handlers for cards
+        document.querySelectorAll('.trending-card').forEach(card => {
+            card.addEventListener('click', function() {
+                console.log('Navigating to:', this.querySelector('h3, h4').textContent);
+            });
+        });
+
+        class DraggableCarousel {
+            constructor(element) {
+                this.carousel = element;
+                this.isDragging = false;
+                this.startX = 0;
+                this.currentX = 0;
+                this.translateX = 0;
+                this.cardWidth = 424; // 400px + 24px margin
+                this.currentIndex = 0;
+                this.totalCards = 4; // Original cards count
+                
+                this.init();
+            }
+
+            init() {
+                this.addEventListeners();
+                this.updatePosition();
+            }
+
+            addEventListeners() {
+                // Mouse events
+                this.carousel.addEventListener('mousedown', this.onDragStart.bind(this));
+                document.addEventListener('mousemove', this.onDragMove.bind(this));
+                document.addEventListener('mouseup', this.onDragEnd.bind(this));
+
+                // Touch events
+                this.carousel.addEventListener('touchstart', this.onDragStart.bind(this));
+                document.addEventListener('touchmove', this.onDragMove.bind(this));
+                document.addEventListener('touchend', this.onDragEnd.bind(this));
+
+                // Prevent default drag behavior on images
+                this.carousel.addEventListener('dragstart', e => e.preventDefault());
+
+                // Card click events
+                this.carousel.querySelectorAll('.band-card').forEach(card => {
+                    card.addEventListener('click', this.onCardClick.bind(this));
+                });
+
+                // Navigation buttons
+                document.getElementById('prevBands').addEventListener('click', this.prevSlide.bind(this));
+                document.getElementById('nextBands').addEventListener('click', this.nextSlide.bind(this));
+            }
+
+            onDragStart(e) {
+                this.isDragging = true;
+                this.carousel.classList.add('dragging');
+                this.startX = this.getEventX(e);
+                this.currentX = this.startX;
+            }
+
+            onDragMove(e) {
+                if (!this.isDragging) return;
+                
+                e.preventDefault();
+                this.currentX = this.getEventX(e);
+                const deltaX = this.currentX - this.startX;
+                const newTranslateX = this.translateX + deltaX;
+                
+                this.carousel.style.transform = `translateX(${newTranslateX}px)`;
+            }
+
+            onDragEnd(e) {
+                if (!this.isDragging) return;
+                
+                this.isDragging = false;
+                this.carousel.classList.remove('dragging');
+                
+                const deltaX = this.currentX - this.startX;
+                const threshold = 50;
+                
+                if (Math.abs(deltaX) > threshold) {
+                    if (deltaX > 0) {
+                        this.prevSlide();
+                    } else {
+                        this.nextSlide();
+                    }
+                } else {
+                    this.updatePosition();
+                }
+            }
+
+            onCardClick(e) {
+                if (Math.abs(this.currentX - this.startX) > 5) {
+                    e.preventDefault();
+                    return;
+                }
+                
+                const card = e.currentTarget;
+                const page = card.dataset.page;
+                
+                if (page) {
+                    // Add click animation
+                    card.style.transform = 'translateY(-6px) scale(1.01)';
+                    setTimeout(() => {
+                        card.style.transform = '';
+                        // Navigate to page (you can replace with actual navigation)
+                        console.log(`Navigating to ${page}`);
+                        // window.location.href = page;
+                    }, 200);
+                }
+            }
+
+            getEventX(e) {
+                return e.type.includes('mouse') ? e.clientX : e.touches[0].clientX;
+            }
+
+            prevSlide() {
+                this.currentIndex = (this.currentIndex - 1 + this.totalCards) % this.totalCards;
+                this.updatePosition();
+            }
+
+            nextSlide() {
+                this.currentIndex = (this.currentIndex + 1) % this.totalCards;
+                this.updatePosition();
+            }
+
+            updatePosition() {
+                this.translateX = -this.currentIndex * this.cardWidth;
+                this.carousel.style.transform = `translateX(${this.translateX}px)`;
+            }
+        }
+
+        // Initialize carousel when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            const carousel = document.getElementById('bandsCarousel');
+            new DraggableCarousel(carousel);
+        });
+
+        // Add click functionality to album cards
+        document.addEventListener('DOMContentLoaded', () => {
+            const cards = document.querySelectorAll('.trending-card');
+            
+            cards.forEach(card => {
+                card.addEventListener('click', (e) => {
+                    const albumTitle = card.querySelector('.album-title').textContent;
+                    
+                    // Add click animation
+                    card.style.transform = 'translateY(-2px) scale(1.01)';
+                    setTimeout(() => {
+                        card.style.transform = '';
+                        // Navigate or perform action
+                        console.log(`Clicked on album: ${albumTitle}`);
+                        // You can add navigation logic here
+                    }, 200);
+                });
+            });
+        });
+
+         // Hover play / pause for videos
+    document.querySelectorAll('.band-video').forEach(video => {
+        video.parentElement.addEventListener('mouseenter', () => {
+            video.play();
+        });
+        video.parentElement.addEventListener('mouseleave', () => {
+            video.pause();
+            video.currentTime = 0; // reset to beginning
+        });
+    });
+    // Play on hover, pause on leave
+    document.querySelectorAll('.band-card').forEach(card => {
+        const video = card.querySelector('.band-video');
+
+        card.addEventListener('mouseenter', () => {
+            video.currentTime = 0; // يبدأ من الأول
+            video.play();
+        });
+
+        card.addEventListener('mouseleave', () => {
+            video.pause();
+            video.currentTime = 0; // يرجع لأول frame
+        });
+    });
+
+     window.addEventListener("scroll", function() {
+    const nav = document.querySelector("nav");
+    if (window.scrollY > 50) { 
+      nav.classList.add("navbar-scrolled");
+    } else {
+      nav.classList.remove("navbar-scrolled");
+    }
+  });
+
+// Audio player functionality
+const playButtons = document.querySelectorAll('.play-button');
+    const playerBar = document.getElementById('player-bar');
+    const exitBtn = document.getElementById('exit-btn');
+    const audioPlayer = document.getElementById('audio-player');
+    const playerAlbumArt = document.getElementById('player-album-art');
+    const playerSongTitle = document.getElementById('player-song-title');
+    const playerArtistAlbum = document.getElementById('player-artist-album');
+    const playPauseBtn = document.getElementById('play-pause-btn');
+    const playPauseIcon = document.getElementById('play-pause-icon');
+    const progressBar = document.getElementById('progress-bar');
+    const progressGradient = document.getElementById('progress-gradient');
+    const currentTime = document.getElementById('current-time');
+    const totalTime = document.getElementById('total-time');
+    const volumeBar = document.getElementById('volume-bar');
+    const volumeIcon = document.getElementById('volume-icon');
+    const shuffleBtn = document.getElementById('shuffle-btn');
+    const prevBtn = document.getElementById('prev-btn');
+    const nextBtn = document.getElementById('next-btn');
+    const repeatBtn = document.getElementById('repeat-btn');
+    const expandBtn = document.getElementById('expand-btn');
+
+    let currentPlayingCard = null;
+    let songList = Array.from(document.querySelectorAll('.trending-card'));
+    let repeatMode = false;
+
+    // --- Core Play/Pause and Song Selection Logic ---
+    playButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const songCard = button.closest('.trending-card');
+            const songSrc = button.getAttribute('data-song-src');
+            const albumArtSrc = songCard.querySelector('img').src;
+            const songTitle = songCard.querySelector('h4').textContent;
+            const artistAlbum = songCard.querySelector('p').textContent;
+
+            if (currentPlayingCard === songCard) {
+                if (audioPlayer.paused) {
+                    audioPlayer.play();
+                    playPauseIcon.classList.replace('bx-play', 'bx-pause');
+                    button.querySelector('i').classList.replace('bx-play', 'bx-pause');
+                } else {
+                    audioPlayer.pause();
+                    playPauseIcon.classList.replace('bx-pause', 'bx-play');
+                    button.querySelector('i').classList.replace('bx-pause', 'bx-play');
+                }
+                return;
+            }
+
+            if (currentPlayingCard) {
+                currentPlayingCard.querySelector('.play-button i').classList.replace('bx-pause', 'bx-play');
+            }
+
+            playerAlbumArt.src = albumArtSrc;
+            playerSongTitle.textContent = songTitle;
+            playerArtistAlbum.textContent = artistAlbum;
+            audioPlayer.src = songSrc;
+
+            playerBar.classList.remove('translate-y-full');
+            
+            audioPlayer.play();
+            playPauseIcon.classList.replace('bx-play', 'bx-pause');
+            button.querySelector('i').classList.replace('bx-play', 'bx-pause');
+            currentPlayingCard = songCard;
+        });
+    });
+
+    exitBtn.addEventListener('click', () => {
+    audioPlayer.pause();
+    playerBar.classList.add('translate-y-full');
+    
+    // Also reset the play icon on the card
+    if (currentPlayingCard) {
+        currentPlayingCard.querySelector('.play-button i').classList.replace('bx-pause', 'bx-play');
+    }
+});
+
+    // --- Player Bar Controls ---
+    playPauseBtn.addEventListener('click', () => {
+        if (!audioPlayer.src) return;
+        if (audioPlayer.paused) {
+            audioPlayer.play();
+            playPauseIcon.classList.replace('bx-play', 'bx-pause');
+            if (currentPlayingCard) {
+                currentPlayingCard.querySelector('.play-button i').classList.replace('bx-play', 'bx-pause');
+            }
+        } else {
+            audioPlayer.pause();
+            playPauseIcon.classList.replace('bx-pause', 'bx-play');
+            if (currentPlayingCard) {
+                currentPlayingCard.querySelector('.play-button i').classList.replace('bx-pause', 'bx-play');
+            }
+        }
+    });
+
+    // --- Seek and Skip Logic ---
+    prevBtn.addEventListener('click', () => {
+        if (!audioPlayer.src) return;
+        if (audioPlayer.currentTime > 3) {
+            audioPlayer.currentTime = 0;
+        } else {
+            const currentIndex = songList.findIndex(card => card === currentPlayingCard);
+            const prevIndex = (currentIndex - 1 + songList.length) % songList.length;
+            songList[prevIndex].querySelector('.play-button').click();
+        }
+    });
+
+    nextBtn.addEventListener('click', () => {
+        if (!audioPlayer.src) return;
+        const currentIndex = songList.findIndex(card => card === currentPlayingCard);
+        const nextIndex = (currentIndex + 1) % songList.length;
+        songList[nextIndex].querySelector('.play-button').click();
+    });
+
+    // --- Shuffle and Repeat Logic ---
+    shuffleBtn.addEventListener('click', () => {
+        const randomIndex = Math.floor(Math.random() * songList.length);
+        const randomSongCard = songList[randomIndex];
+        randomSongCard.querySelector('.play-button').click();
+    });
+
+    repeatBtn.addEventListener('click', () => {
+        repeatMode = !repeatMode;
+        if (repeatMode) {
+            repeatBtn.classList.add('text-orange-500');
+        } else {
+            repeatBtn.classList.remove('text-orange-500');
+        }
+    });
+    
+    // --- Expand/Collapse Logic ---
+    expandBtn.addEventListener('click', () => {
+        if (playerBar.classList.contains('h-20')) {
+            playerBar.classList.replace('h-20', 'h-48');
+            expandBtn.querySelector('i').classList.replace('bx-expand-alt', 'bx-compress-alt');
+        } else {
+            playerBar.classList.replace('h-48', 'h-20');
+            expandBtn.querySelector('i').classList.replace('bx-compress-alt', 'bx-expand-alt');
+        }
+    });
+
+    // --- Progress Bar & Time Logic ---
+    audioPlayer.addEventListener('timeupdate', () => {
+        const progress = (audioPlayer.currentTime / audioPlayer.duration) * 100;
+        progressGradient.style.width = `${progress}%`;
+
+        const minutes = Math.floor(audioPlayer.currentTime / 60);
+        const seconds = Math.floor(audioPlayer.currentTime % 60).toString().padStart(2, '0');
+        currentTime.textContent = `${minutes}:${seconds}`;
+    });
+
+    audioPlayer.addEventListener('loadedmetadata', () => {
+        const minutes = Math.floor(audioPlayer.duration / 60);
+        const seconds = Math.floor(audioPlayer.duration % 60).toString().padStart(2, '0');
+        totalTime.textContent = `${minutes}:${seconds}`;
+    });
+
+    progressBar.addEventListener('input', () => {
+        const seekTime = (progressBar.value / 100) * audioPlayer.duration;
+        audioPlayer.currentTime = seekTime;
+    });
+
+    // --- Volume Control ---
+    volumeBar.addEventListener('input', () => {
+        audioPlayer.volume = volumeBar.value / 100;
+
+        if (audioPlayer.volume === 0) {
+            volumeIcon.classList.replace('bx-volume-full', 'bx-volume-mute');
+            volumeIcon.classList.replace('bx-volume-low', 'bx-volume-mute');
+        } else if (audioPlayer.volume > 0 && audioPlayer.volume <= 0.5) {
+            volumeIcon.classList.replace('bx-volume-full', 'bx-volume-low');
+            volumeIcon.classList.replace('bx-volume-mute', 'bx-volume-low');
+        } else {
+            volumeIcon.classList.replace('bx-volume-low', 'bx-volume-full');
+            volumeIcon.classList.replace('bx-volume-mute', 'bx-volume-full');
+        }
+    });
+
+    // --- Other Controls ---
+    audioPlayer.addEventListener('ended', () => {
+        playPauseIcon.classList.replace('bx-pause', 'bx-play');
+        if (currentPlayingCard) {
+             currentPlayingCard.querySelector('.play-button i').classList.replace('bx-pause', 'bx-play');
+        }
+
+        if (repeatMode) {
+            audioPlayer.currentTime = 0;
+            audioPlayer.play();
+        } else {
+            nextBtn.click();
+        }
+    });
+    document.addEventListener("DOMContentLoaded", () => {
+  const videoElement = document.getElementById("bgVideo");
+
+  // List of your background videos
+  const videos = [
+    "public/_prompt_add_202508301455_jkw7m.mp4",
+    "public/the1.mp4"
+  ];
+
+  // Pick one at random
+  const randomVideo = videos[Math.floor(Math.random() * videos.length)];
+
+  // Set the source dynamically
+  videoElement.innerHTML = `<source src="${randomVideo}" type="video/mp4">`;
+  videoElement.load();
+  videoElement.play();
+});
+// FIXED RANDOM BACKGROUND VIDEO FUNCTIONALITY
+        (() => {
+            const videoElement = document.getElementById("bgVideo");
+
+            // List of your background videos
+            const videos = [
+                "public/_prompt_add_202508301455_jkw7m.mp4",
+                "public/the1.mp4", 
+                "public/_prompt_add_202508301624_vuvzm.mp4"
+            ];
+
+            // Pick one at random
+            const randomVideo = videos[Math.floor(Math.random() * videos.length)];
+            
+            // Add timestamp to prevent caching
+            const videoWithTimestamp = randomVideo + "?v=" + Date.now();
+
+            // Clear existing sources and set new one
+            videoElement.innerHTML = "";
+            videoElement.src = videoWithTimestamp;
+            videoElement.load();
+           
+
+            // Force play after load
+            videoElement.addEventListener('loadeddata', () => {
+                videoElement.play().catch(e => {
+                    console.log("Video autoplay failed:", e);
+                });
+            });
+        })();
+    </script>
+</body>
+</html>

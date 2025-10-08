@@ -1,0 +1,1466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Radiohead - MELOVOID</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Roboto+Mono:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js">
+    </script> <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <style>
+        body {
+  font-family: 'Orbitron', 'Roboto Mono', monospace, sans-serif;
+  background: #000000;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
+       /* Noise Overlay */
+
+        body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url("public/noise.webp") repeat;
+  opacity: 0.10;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Hero Overlay */
+.hero-gradient::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: 
+    url("public/noise.png") repeat,
+    linear-gradient(
+      to bottom,
+      rgba(0,0,0,0) 0%,
+      
+      rgba(0,0,0,0.85) 80%,
+      rgba(15,14,14,1) 100%
+    );
+  background-blend-mode: multiply;
+  pointer-events: none;
+  z-index: 2;
+}
+ .glass-effect {
+            background: rgba(255,255,255,0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .text-stroke {
+            -webkit-text-stroke: 1px rgba(255,255,255,0.8);
+            color: transparent;
+        }
+
+        .glass-black-effect {
+            backdrop-filter: blur(10px);
+            background-color: rgba(0, 0, 0, 0.5);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 -4px 30px rgba(0, 0, 0, 0.1);
+        }
+
+/* Hero Content */
+.hero-gradient > * {
+  position: relative;
+  z-index: 3;
+}
+
+          .navbar-scrolled {
+  background: rgba(0, 0, 0, 0.9);
+  backdrop-filter: blur(6px);
+  transition: background 0.3s ease;
+}
+
+
+
+/* Burger button animation CSS from Uiverse.io */
+        .burger {
+            position: relative;
+            width: 40px;
+            height: 30px;
+            background: transparent;
+            cursor: pointer;
+            display: block;
+        }
+
+        .burger input {
+            display: none;
+        }
+
+        .burger span {
+            display: block;
+            position: absolute;
+            height: 4px;
+            width: 100%;
+            background: white;
+            border-radius: 9px;
+            opacity: 1;
+            left: 0;
+            transform: rotate(0deg);
+            transition: .25s ease-in-out;
+        }
+
+        .burger span:nth-of-type(1) {
+            top: 0px;
+            transform-origin: left center;
+        }
+
+        .burger span:nth-of-type(2) {
+            top: 50%;
+            transform: translateY(-50%);
+            transform-origin: left center;
+        }
+
+        .burger span:nth-of-type(3) {
+            top: 100%;
+            transform-origin: left center;
+            transform: translateY(-100%);
+        }
+
+        .burger input:checked ~ span:nth-of-type(1) {
+            transform: rotate(45deg);
+            top: -1px;
+            left: 5px;
+        }
+
+        .burger input:checked ~ span:nth-of-type(2) {
+            width: 0%;
+            opacity: 0;
+        }
+
+        .burger input:checked ~ span:nth-of-type(3) {
+            transform: rotate(-45deg);
+            top: 29px;
+            left: 5px;
+        }
+
+        .track-item:hover {
+            background: rgba(239, 68, 68, 0.1); /* Changed to red */
+        }
+
+        .album-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(239, 68, 68, 0.3); /* Changed to red */
+        }
+
+        .play-button {
+            transition: all 0.3s ease;
+        }
+
+        .play-button:hover {
+            background: #DC2626; /* Changed to red */
+            transform: scale(1.1);
+        }
+
+        .stat-number {
+            background: linear-gradient(135deg, #DC2626, #EF4444); /* Changed to red */
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: #DC2626; /* Changed to red */
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: rgba(255,255,255,0.1);
+        }
+
+        .fan-also-like-item {
+            transition: all 0.3s ease;
+        }
+
+        .fan-also-like-item:hover {
+            transform: scale(1.05);
+        }
+
+        /* Player controls styling */
+        .player-control-btn {
+            transition: all 0.3s ease;
+        }
+
+        .player-control-btn:hover {
+            color: #DC2626; /* Changed to red */
+            transform: scale(1.1);
+        }
+
+        #progress-bar::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 12px;
+            height: 12px;
+            background: #DC2626; /* Changed to red */
+            border-radius: 50%;
+            cursor: pointer;
+            margin-top: -5px;
+        }
+
+        #progress-bar::-moz-range-thumb {
+            width: 12px;
+            height: 12px;
+            background: #DC2626; /* Changed to red */
+            border-radius: 50%;
+            cursor: pointer;
+            border: none;
+        }
+
+        #volume-bar::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 12px;
+            height: 12px;
+            background: #DC2626; /* Changed to red */
+            border-radius: 50%;
+            cursor: pointer;
+            margin-top: -5px;
+        }
+
+        #volume-bar::-moz-range-thumb {
+            width: 12px;
+            height: 12px;
+            background: #DC2626; /* Changed to red */
+            border-radius: 50%;
+            cursor: pointer;
+            border: none;
+        }
+
+        /* navbar transition */
+nav {
+  transition: background-color 0.3s ease;
+}
+
+/* لما يحصل scroll */
+nav.scrolled {
+  background-color: rgba(0,0,0,0.9); /* أسود شبه شفاف */
+  backdrop-filter: blur(6px);        /* اختيارية: بلور شيك */
+}
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: -250px; /* مخفي */
+  width: 250px;
+  height: 100vh;
+  background: #111;
+  color: white;
+  transition: left 0.3s ease;
+  padding: 20px;
+  z-index: 1000;
+}
+
+#menuToggle:checked ~ #sidebar {
+  left: 0; /* يظهر */
+}
+ /* Custom styles to adjust Swiper navigation buttons */
+        .swiper-button-next, .swiper-button-prev {
+            color: white !important;
+            --swiper-navigation-size: 20px;
+        }
+        .swiper-button-next:hover, .swiper-button-prev:hover {
+            color: #d1d5db !important;
+        }
+        .about-section {
+    width: 100%;
+    max-width: 1200px;
+    padding: 20px;
+}
+
+.section-title {
+    color: #fff;
+    font-size: 2.5em;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.about-content-wrapper {
+    display: flex;
+    gap: 40px;
+    background-color: #1a1a1a;
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.media-container {
+    flex-shrink: 0;
+    position: relative;
+    width: 50%;
+    border-radius: 15px;
+    overflow: hidden;
+    aspect-ratio: 16 / 9; /* Maintains a consistent aspect ratio */
+}
+
+.media-image,
+.media-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 15px;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.media-video {
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.text-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.rank {
+    font-size: 3em;
+    font-weight: bold;
+    color: #DC2626; /* Changed to red */
+    line-height: 1;
+}
+
+.in-the-world {
+    font-size: 0.5em;
+    font-weight: normal;
+    color: #ccc;
+}
+
+p {
+    color: #ccc;
+    font-size: 1.1em;
+    line-height: 1.6;
+    margin-top: 15px;
+}
+
+.listeners {
+    color: #e0e0e0;
+    font-weight: bold;
+    margin-top: 20px;
+}
+/* Custom styles to adjust Swiper navigation buttons */
+        .swiper-button-next, .swiper-button-prev {
+            color: white !important;
+            --swiper-navigation-size: 20px;
+        }
+        .swiper-button-next:hover, .swiper-button-prev:hover {
+            color: #d1d5db !important;
+        }
+        /* Hide navigation arrows on larger screens */
+        @media (min-width: 768px) {
+            .swiper-button-next, .swiper-button-prev {
+                display: none !important;
+            }
+        }
+
+@keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="text-white min-h-screen">
+   <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 p-6">
+    <div class="flex justify-between items-center max-w-7xl mx-auto">
+        <div class="flex items-center space-x-4">
+            <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center">
+                <i class="fas fa-music text-black text-sm"></i>
+            </div>
+            <span class="font-orbitron text-2xl tracking-wider">
+                MELO<b class="text-red-500">VOID</b> <!-- Changed to red -->
+            </span>
+        </div>
+        
+        <div class="hidden md:flex items-center space-x-8">
+            <a href="homepage.html" class="font-mono text-sm hover:text-red-500 transition-colors">HOME</a> <!-- Changed to red -->
+            <a href="#" class="font-mono text-sm hover:text-red-500 transition-colors">ARTISTS</a> <!-- Changed to red -->
+            <a href="#" class="font-mono text-sm hover:text-red-500 transition-colors">ALBUMS</a> <!-- Changed to red -->
+            <a href="#" class="font-mono text-sm hover:text-red-500 transition-colors">PLAYLISTS</a> <!-- Changed to red -->
+        </div>
+        
+        <div class="hidden md:flex items-center space-x-3">
+            <a href="#" class="w-8 h-8 glass-effect rounded-full flex items-center justify-center hover:bg-red-500 transition-all"> <!-- Changed to red -->
+                <i class="fab fa-spotify text-xs"></i>
+            </a>
+            <a href="#" class="w-8 h-8 glass-effect rounded-full flex items-center justify-center hover:bg-red-500 transition-all"> <!-- Changed to red -->
+                <i class="fab fa-apple text-xs"></i>
+            </a>
+            <a href="#" class="w-8 h-8 glass-effect rounded-full flex items-center justify-center hover:bg-red-500 transition-all"> <!-- Changed to red -->
+                <i class="fab fa-youtube text-xs"></i>
+            </a>
+            <a href="#" class="w-8 h-8 glass-effect rounded-full flex items-center justify-center hover:bg-red-500 transition-all"> <!-- Changed to red -->
+                <i class="fab fa-instagram text-xs"></i>
+            </a>
+        </div>
+        
+        <!-- Mobile Menu Toggle Button -->
+            <div class="md:hidden focus:outline-none">
+                <label class="burger" for="burger">
+                    <input type="checkbox" id="burger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </label>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu (Hidden by Default) -->
+    <div id="mobile-menu" class="fixed top-0 bottom-0 left-0 w-1/2 transform -translate-x-full transition-transform duration-300 ease-in-out bg-black p-6 z-40">
+        <div class="flex flex-col items-start space-y-8 mt-24">
+            <a href="homepage.html" class="font-mono text-xl hover:text-red-500 transition-colors">HOME</a> <!-- Changed to red -->
+            <a href="#" class="font-mono text-xl hover:text-red-500 transition-colors">ARTISTS</a> <!-- Changed to red -->
+            <a href="#" class="font-mono text-xl hover:text-red-500 transition-colors">ALBUMS</a> <!-- Changed to red -->
+            <a href="#" class="font-mono text-xl hover:text-red-500 transition-colors">PLAYLISTS</a> <!-- Changed to red -->
+        </div>
+        <div class="flex items-center space-x-3 mt-8">
+            <a href="#" class="w-8 h-8 glass-effect rounded-full flex items-center justify-center hover:bg-red-500 transition-all"> <!-- Changed to red -->
+                <i class="fab fa-spotify text-xs"></i>
+            </a>
+            <a href="#" class="w-8 h-8 glass-effect rounded-full flex items-center justify-center hover:bg-red-500 transition-all"> <!-- Changed to red -->
+                <i class="fab fa-apple text-xs"></i>
+            </a>
+            <a href="#" class="w-8 h-8 glass-effect rounded-full flex items-center justify-center hover:bg-red-500 transition-all"> <!-- Changed to red -->
+                <i class="fab fa-youtube text-xs"></i>
+            </a>
+            <a href="#" class="w-8 h-8 glass-effect rounded-full flex items-center justify-center hover:bg-red-500 transition-all"> <!-- Changed to red -->
+                <i class="fab fa-instagram text-xs"></i>
+            </a>
+        </div>
+    </div>
+
+
+   <section class="relative h-[600px] overflow-hidden">
+    <div class="absolute inset-0 z-0">
+        <img src="public/3463805.jpg" 
+             alt="Radiohead" 
+             class="w-full h-full object-cover object-top">
+        <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
+    </div>
+
+    <!-- هنا زودت pl-20 عشان يتحرك يمين -->
+    <div class="absolute bottom-6 left-6 right-6 z-10 pl-20">
+        <h1 class="text-4xl md:text-6xl font-orbitron font-black uppercase tracking-widest text-stroke mb-2">RADIOHEAD</h1>
+        <div class="flex items-center space-x-6 text-sm text-gray-200 mb-6">
+            <span class="text-2xl font-bold">40,352,673</span> <!-- Updated monthly listeners for Radiohead -->
+            <span>monthly listeners</span>
+        </div>
+
+        <div class="flex items-center space-x-4">
+            <!-- Play Button -->
+            <button id="main-play-btn" class="w-12 h-12 flex items-center justify-center rounded-full bg-[#DC2626] text-white hover:scale-110 transition-transform"> <!-- Changed to red -->
+                <i class="fas fa-play"></i>
+            </button>
+
+            <!-- Follow Button -->
+            <button class="px-6 py-2 border border-white rounded-full text-white hover:bg-white hover:text-black transition-all">
+                Follow
+            </button>
+
+            <!-- More Options -->
+            <button class="w-10 h-10 flex items-center justify-center text-white hover:bg-white/10 rounded-full transition-all">
+                <i class="fas fa-ellipsis-h"></i>
+            </button>
+        </div>
+    </div>
+</section>
+
+
+    <!-- Popular Tracks -->
+    <section class="py-12">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex items-center justify-between mb-8">
+                <h2 class="text-2xl font-bold">Popular</h2>
+                <button class="text-sm text-gray-400 hover:text-white transition-colors">See more</button>
+            </div>
+
+            <div class="space-y-2" id="popular-tracks">
+                <!-- Track 1 -->
+                <div class="track-item flex items-center justify-between p-3 rounded-lg hover:bg-white/5 transition-all group" data-index="0">
+                    <div class="flex items-center space-x-4">
+                        <div class="relative">
+                            <span class="track-number text-gray-400 text-sm w-4 group-hover:opacity-0 transition-opacity">1</span>
+                           
+                        </div>
+                        <img src="public/creep.jpg" 
+                             class="w-10 h-10 rounded" alt="OK Computer">
+                        <div>
+                            <p class="font-medium">Creep</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                       
+                        <button class="w-6 h-6 flex items-center justify-center text-gray-400 hover:text-white">
+                            <i class="fas fa-heart text-xs"></i>
+                        </button>
+                        <span class="text-gray-400 text-sm">3:59</span>
+                        <button class="w-6 h-6 flex items-center justify-center text-gray-400 hover:text-white">
+                            <i class="fas fa-ellipsis-h text-xs"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Track 2 -->
+                <div class="track-item flex items-center justify-between p-3 rounded-lg hover:bg-white/5 transition-all group" data-index="1">
+                    <div class="flex items-center space-x-4">
+                        <div class="relative">
+                            <span class="track-number text-gray-400 text-sm w-4 group-hover:opacity-0 transition-opacity">2</span>
+                           
+                        </div>
+                        <img src="public/karma police.jpg" 
+                             class="w-10 h-10 rounded" alt="In Rainbows">
+                        <div>
+                            <p class="font-medium">Karma Police</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        
+                        <button class="w-6 h-6 flex items-center justify-center text-gray-400 hover:text-white">
+                            <i class="fas fa-heart text-xs"></i>
+                        </button>
+                        <span class="text-gray-400 text-sm">4:21</span>
+                        <button class="w-6 h-6 flex items-center justify-center text-gray-400 hover:text-white">
+                            <i class="fas fa-ellipsis-h text-xs"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Track 3 -->
+                <div class="track-item flex items-center justify-between p-3 rounded-lg hover:bg-white/5 transition-all group" data-index="2">
+                    <div class="flex items-center space-x-4">
+                        <div class="relative">
+                            <span class="track-number text-gray-400 text-sm w-4 group-hover:opacity-0 transition-opacity">3</span>
+
+                        </div>
+                        <img src="public/In Rainbows.jpg" 
+                             class="w-10 h-10 rounded" alt="The Bends">
+                        <div>
+                            <p class="font-medium">All I Need</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        
+                        <button class="w-6 h-6 flex items-center justify-center text-gray-400 hover:text-white">
+                            <i class="fas fa-heart text-xs"></i>
+                        </button>
+                        <span class="text-gray-400 text-sm">3:48</span>
+                        <button class="w-6 h-6 flex items-center justify-center text-gray-400 hover:text-white">
+                            <i class="fas fa-ellipsis-h text-xs"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Track 4 -->
+                <div class="track-item flex items-center justify-between p-3 rounded-lg hover:bg-white/5 transition-all group" data-index="3">
+                    <div class="flex items-center space-x-4">
+                        <div class="relative">
+                            <span class="track-number text-gray-400 text-sm w-4 group-hover:opacity-0 transition-opacity">4</span>
+                           
+                        </div>
+                        <img src="public/OK_Computer.jpg" 
+                             class="w-10 h-10 rounded" alt="Kid A">
+                        <div>
+                            <p class="font-medium">Let Down</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        
+                        <button class="w-6 h-6 flex items-center justify-center text-gray-400 hover:text-white">
+                            <i class="fas fa-heart text-xs"></i>
+                        </button>
+                        <span class="text-gray-400 text-sm">4:59</span>
+                        <button class="w-6 h-6 flex items-center justify-center text-gray-400 hover:text-white">
+                            <i class="fas fa-ellipsis-h text-xs"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Track 5 -->
+                <div class="track-item flex items-center justify-between p-3 rounded-lg hover:bg-white/5 transition-all group" data-index="4">
+                    <div class="flex items-center space-x-4">
+                        <div class="relative">
+                            <span class="track-number text-gray-400 text-sm w-4 group-hover:opacity-0 transition-opacity">5</span>
+                           
+                        </div>
+                        <img src="public/the bends.png" 
+                             class="w-10 h-10 rounded" alt="Amnesiac">
+                        <div>
+                            <p class="font-medium">Fake Plastic Trees</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        
+                        <button class="w-6 h-6 flex items-center justify-center text-gray-400 hover:text-white">
+                            <i class="fas fa-heart text-xs"></i>
+                        </button>
+                        <span class="text-gray-400 text-sm">4:50</span>
+                        <button class="w-6 h-6 flex items-center justify-center text-gray-400 hover:text-white">
+                            <i class="fas fa-ellipsis-h text-xs"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Discography Section -->
+<section class="py-12">
+    <div class="max-w-7xl mx-auto px-6">
+        <!-- Header with "Discography" title and "Show all" button -->
+        <div class="flex items-center justify-between mb-8">
+            <h2 class="text-2xl font-bold">Discography</h2>
+            <button class="text-sm text-gray-400 hover:text-white transition-colors">Show all</button>
+        </div>
+
+        <!-- Category Filter Tabs -->
+        <div class="flex space-x-4 mb-8">
+            <button class="filter-btn text-white font-medium border-b-2 border-red-500 pb-2 active" data-category="popular">Popular releases</button> <!-- Changed to red -->
+            <button class="filter-btn text-gray-400 hover:text-white transition-colors pb-2" data-category="albums">Albums</button>
+            <button class="filter-btn text-gray-400 hover:text-white transition-colors pb-2" data-category="singles">Singles and EPs</button>
+        </div>
+
+        <!-- Main content container -->
+        <div id="items-container">
+            
+            <!-- Popular Items Carousel -->
+            <div id="popular-carousel" class="swiper">
+                <div class="swiper-wrapper">
+                    <!-- Album 1: OK Computer -->
+                    <div class="swiper-slide item-card popular albums">
+                         <a href="Melovoid.html" class="band-link">
+                        <div class="album-card bg-white/5 p-4 rounded-lg transition-all hover:bg-white/10 cursor-pointer">
+                            <img src="public/ok_computer.jpg" 
+                                 class="w-full aspect-square rounded-lg mb-8" alt="OK Computer">
+                            <h3 class="font-semibold mb-3">OK Computer</h3>
+                            <p class="text-sm text-gray-400">1997 • Album</p>
+                        </div>
+                        </a>
+                    </div>
+                    <!-- Album 2: In Rainbows -->
+                    <div class="swiper-slide item-card popular albums">
+                        <div class="album-card bg-white/5 p-4 rounded-lg transition-all hover:bg-white/10 cursor-pointer">
+                            <img src="public/In Rainbows.jpg" 
+                                 class="w-full aspect-square rounded-lg mb-8" alt="In Rainbows">
+                            <h3 class="font-semibold mb-3">In Rainbows</h3>
+                            <p class="text-sm text-gray-400">2007 • Album</p>
+                        </div>
+                    </div>
+                    <!-- Album 3: The Bends -->
+                    <div class="swiper-slide item-card popular albums">
+                        <div class="album-card bg-white/5 p-4 rounded-lg transition-all hover:bg-white/10 cursor-pointer">
+                            <img src="public/the bends.png" 
+                                 class="w-full aspect-square rounded-lg mb-8" alt="The Bends">
+                            <h3 class="font-semibold mb-3">The Bends</h3>
+                            <p class="text-sm text-gray-400">1995 • Album</p>
+                        </div>
+                    </div>
+                    <!-- Album 4: Kid A -->
+                    <div class="swiper-slide item-card popular albums">
+                        <div class="album-card bg-white/5 p-4 rounded-lg transition-all hover:bg-white/10 cursor-pointer">
+                            <img src="public/KId A.jpg" 
+                                 class="w-full aspect-square rounded-lg mb-8" alt="Kid A">
+                            <h3 class="font-semibold mb-3">Kid A</h3>
+                            <p class="text-sm text-gray-400">2000 • Album</p>
+                        </div>
+                    </div>
+                    <!-- Album 5: Amnesiac -->
+                    <div class="swiper-slide item-card popular albums">
+                        <div class="album-card bg-white/5 p-4 rounded-lg transition-all hover:bg-white/10 cursor-pointer">
+                            <img src="public/Radiohead_-_Amnesiac_cover.png" 
+                                 class="w-full aspect-square rounded-lg mb-8" alt="Amnesiac">
+                            <h3 class="font-semibold mb-3">Amnesiac</h3>
+                            <p class="text-sm text-gray-400">2001 • Album</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Navigation Arrows -->
+                <div class="swiper-button-next text-white hover:text-gray-300"></div>
+                <div class="swiper-button-prev text-white hover:text-gray-300"></div>
+            </div>
+            
+            <!-- Albums Carousel (Initially hidden) -->
+            <div id="albums-carousel" class="swiper hidden">
+                <div class="swiper-wrapper">
+                    <!-- Album 1: Pablo Honey -->
+                    <div class="swiper-slide item-card albums">
+                        <div class="album-card bg-white/5 p-4 rounded-lg transition-all hover:bg-white/10 cursor-pointer">
+                            <img src="public/creep.jpg" 
+                                 class="w-full aspect-square rounded-lg mb-8" alt="Pablo Honey">
+                            <h3 class="font-semibold mb-3">Pablo Honey</h3>
+                            <p class="text-sm text-gray-400">1993 • Album</p>
+                        </div>
+                    </div>
+                    <!-- Album 2: The Bends -->
+                    <div class="swiper-slide item-card albums">
+                        <div class="album-card bg-white/5 p-4 rounded-lg transition-all hover:bg-white/10 cursor-pointer">
+                            <img src="public/the bends.png" 
+                                 class="w-full aspect-square rounded-lg mb-8" alt="The Bends">
+                            <h3 class="font-semibold mb-3">The Bends</h3>
+                            <p class="text-sm text-gray-400">1995 • Album</p>
+                        </div>
+                    </div>
+                    <!-- Album 3: OK Computer -->
+                    <div class="swiper-slide item-card albums">
+                        <div class="album-card bg-white/5 p-4 rounded-lg transition-all hover:bg-white/10 cursor-pointer">
+                            <img src="public/ok_computer.jpg" 
+                                 class="w-full aspect-square rounded-lg mb-8" alt="OK Computer">
+                            <h3 class="font-semibold mb-3">OK Computer</h3>
+                            <p class="text-sm text-gray-400">1997 • Album</p>
+                        </div>
+                    </div>
+                    <!-- Album 4: Kid A -->
+                    <div class="swiper-slide item-card albums">
+                        <a href="Hail to the Thief.html" class="band-link">
+                        <div class="album-card bg-white/5 p-4 rounded-lg transition-all hover:bg-white/10 cursor-pointer">
+                            <img src="public/hail.jpg" 
+                                 class="w-full aspect-square rounded-lg mb-8" alt="Kid A">
+                            <h3 class="font-semibold mb-3">Hail to the Thief</h3>
+                            <p class="text-sm text-gray-400">2003 • Album</p>
+                        </div>
+                        </a>
+                    </div>
+                    <!-- Album 5: Amnesiac -->
+                    <div class="swiper-slide item-card albums">
+                        <div class="album-card bg-white/5 p-4 rounded-lg transition-all hover:bg-white/10 cursor-pointer">
+                            <img src="public/a moon.jpg" 
+                                 class="w-full aspect-square rounded-lg mb-8" alt="Amnesiac">
+                            <h3 class="font-semibold mb-3">A Moon Shaped Pool</h3>
+                            <p class="text-sm text-gray-400">2016 • Album</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Navigation Arrows -->
+                <div class="swiper-button-next text-white hover:text-gray-300"></div>
+                <div class="swiper-button-prev text-white hover:text-gray-300"></div>
+            </div>
+
+            <!-- Singles & EPs Carousel (Initially hidden) -->
+            <div id="singles-carousel" class="swiper hidden">
+                <div class="swiper-wrapper">
+                    <!-- Single 1: Creep -->
+                    <div class="swiper-slide item-card singles">
+                        <div class="album-card bg-white/5 p-4 rounded-lg transition-all hover:bg-white/10 cursor-pointer">
+                            <img src="public/creep.jpg" 
+                                 class="w-full aspect-square rounded-lg mb-8" alt="Creep">
+                            <h3 class="font-semibold mb-3">Creep</h3>
+                            <p class="text-sm text-gray-400">1992 • Single</p>
+                        </div>
+                    </div>
+                    <!-- Single 2: High and Dry / Planet Telex -->
+                    <div class="swiper-slide item-card singles">
+                        <div class="album-card bg-white/5 p-4 rounded-lg transition-all hover:bg-white/10 cursor-pointer">
+                            <img src="public/high.jpg" 
+                                 class="w-full aspect-square rounded-lg mb-8" alt="High and Dry / Planet Telex">
+                            <h3 class="font-semibold mb-3">High and Dry</h3>
+                            <p class="text-sm text-gray-400">1995 • Single</p>
+                        </div>
+                    </div>
+                    <!-- Single 3: Karma Police -->
+                    <div class="swiper-slide item-card singles">
+                        <div class="album-card bg-white/5 p-4 rounded-lg transition-all hover:bg-white/10 cursor-pointer">
+                            <img src="public/Karma Police.jpg" 
+                                 class="w-full aspect-square rounded-lg mb-8" alt="Karma Police">
+                            <h3 class="font-semibold mb-3">Karma Police</h3>
+                            <p class="text-sm text-gray-400">1997 • Single</p>
+                        </div>
+                    </div>
+                    <!-- Single 4: No Surprises -->
+                    <div class="swiper-slide item-card singles">
+                        <div class="album-card bg-white/5 p-4 rounded-lg transition-all hover:bg-white/10 cursor-pointer">
+                            <img src="public/no.jpg" 
+                                 class="w-full aspect-square rounded-lg mb-8" alt="No Surprises">
+                            <h3 class="font-semibold mb-3">No Surprises</h3>
+                            <p class="text-sm text-gray-400">1998 • Single</p>
+                        </div>
+                    </div>
+                    <!-- Single 5: Pyramid Song -->
+                    <div class="swiper-slide item-card singles">
+                        <div class="album-card bg-white/5 p-4 rounded-lg transition-all hover:bg-white/10 cursor-pointer">
+                            <img src="public/py.png" 
+                                 class="w-full aspect-square rounded-lg mb-8" alt="Pyramid Song">
+                            <h3 class="font-semibold mb-3">Pyramid Song</h3>
+                            <p class="text-sm text-gray-400">2001 • Single</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Navigation Arrows -->
+                <div class="swiper-button-next text-white hover:text-gray-300"></div>
+                <div class="swiper-button-prev text-white hover:text-gray-300"></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <section class="py-12">
+    <div class="max-w-7xl mx-auto px-6">
+        <h2 class="text-2xl font-bold mb-8">About</h2>
+        
+        <div class="grid md:grid-cols-2 gap-12 items-center">
+            <div class="relative group"> 
+                <img id="about-image" src="public/3463765.jpg" 
+                    class="w-full rounded-lg transition-opacity duration-500 opacity-100 group-hover:opacity-0" alt="Radiohead band photo">
+                <video id="about-video" src="public/Radiohead - Creep.mp4" class="absolute inset-0 w-full h-full object-cover rounded-lg transition-opacity duration-500 opacity-0 group-hover:opacity-100" playsinline></video>
+            </div>
+            
+            <div>
+                <div class="flex items-center mb-6">
+                    <span class="stat-number text-4xl font-black mr-4">#92</span> <!-- Updated rank for Radiohead -->
+                    <span class="text-lg">in the world</span>
+                </div>
+                
+                <p class="text-gray-300 leading-relaxed mb-6">
+                    Radiohead is an English rock band formed in Abingdon, Oxfordshire, in 1985. 
+                    The band consists of Thom Yorke (vocals, guitar, piano), Jonny Greenwood (lead guitar, keyboards, other instruments), 
+                    Colin Greenwood (bass), Ed O'Brien (guitar, backing vocals), and Philip Selway (drums, percussion). 
+                    They have been praised for their experimental sound, lyrical depth, and constant evolution, 
+                    making them one of the most influential bands of their generation.
+                </p>
+                
+                <div class="text-gray-300">
+                    <p class="mb-2"><span class="stat-number font-bold">40.3M</span> monthly listeners</p> <!-- Updated monthly listeners -->
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+   <!-- Fans Also Like -->
+<section class="py-12">
+    <div class="max-w-7xl mx-auto px-6">
+        <div class="flex items-center justify-between mb-8">
+            <h2 class="text-2xl font-bold">Fans also like</h2>
+            <button class="text-sm text-gray-400 hover:text-white transition-colors">Show all</button>
+        </div>
+
+        <div id="fans-carousel" class="swiper">
+            <div class="swiper-wrapper">
+
+                <!-- Artist 1: CAS -->
+                <div class="swiper-slide fan-also-like-item text-center">
+                    <a href="cas.html" class="block hover:opacity-80 transition">
+                        <div class="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden">
+                            <img src="public/cas2.webp" 
+                                 class="w-full h-full object-cover" alt="CAS">
+                        </div>
+                        <h3 class="font-semibold mb-1">CAS</h3>
+                        <p class="text-sm text-gray-400">Artist</p>
+                    </a>
+                </div>
+
+                <!-- Artist 2: Coldplay -->
+                <div class="swiper-slide fan-also-like-item text-center">
+                    <a href="coldplay.html" class="block hover:opacity-80 transition">
+                        <div class="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden">
+                            <img src="public/coldplay-parachutes-globe-album-cover-yp614nxh6ajo7w7i.jpg" 
+                                 class="w-full h-full object-cover" alt="Coldplay">
+                        </div>
+                        <h3 class="font-semibold mb-1">Coldplay</h3>
+                        <p class="text-sm text-gray-400">Artist</p>
+                    </a>
+                </div>
+
+                <!-- Artist 3: Arctic Monkeys -->
+                <div class="swiper-slide fan-also-like-item text-center">
+                    <a href="arctic-monkeys.html" class="block hover:opacity-80 transition">
+                        <div class="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden">
+                            <img src="public/AM.jpg" 
+                                 class="w-full h-full object-cover" alt="Arctic Monkeys">
+                        </div>
+                        <h3 class="font-semibold mb-1">Arctic Monkeys</h3>
+                        <p class="text-sm text-gray-400">Artist</p>
+                    </a>
+                </div>
+
+                <!-- Artist 4: Nirvana -->
+                <div class="swiper-slide fan-also-like-item text-center">
+                    <a href="Nirvana.html" class="block hover:opacity-80 transition">
+                        <div class="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden">
+                            <img src="public/nirvana.jpg" 
+                                 class="w-full h-full object-cover" alt="Nirvana">
+                        </div>
+                        <h3 class="font-semibold mb-1">Nirvana</h3>
+                        <p class="text-sm text-gray-400">Artist</p>
+                    </a>
+                </div>
+
+                <!-- Artist 5: The Smiths -->
+                <div class="swiper-slide fan-also-like-item text-center">
+                    <a href="the-smiths.html" class="block hover:opacity-80 transition">
+                        <div class="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden">
+                            <img src="public/Hatful of Hollow.jpg" 
+                                 class="w-full h-full object-cover" alt="The Smiths">
+                        </div>
+                        <h3 class="font-semibold mb-1">The Smiths</h3>
+                        <p class="text-sm text-gray-400">Artist</p>
+                    </a>
+                </div>
+
+            </div>
+
+            <!-- Navigation Arrows -->
+            <div class="swiper-button-next text-white hover:text-gray-300"></div>
+            <div class="swiper-button-prev text-white hover:text-gray-300"></div>
+        </div>
+    </div>
+</section>
+
+
+
+    <!-- Music Player Bar -->
+    <div id="player-bar" class="fixed bottom-0 left-0 right-0 h-32 md:h-20 glass-black-effect flex flex-col md:flex-row items-center px-4 md:px-8 z-50 transform translate-y-full transition-transform duration-300 overflow-visible">
+        <div class="flex-shrink-0 flex items-center space-x-4 w-full md:w-1/4 mb-2 md:mb-0">
+            <img id="player-album-art" src="" alt="Album Art" class="w-12 h-12 rounded-md">
+            <div class="flex-1">
+                <h4 id="player-song-title" class="text-sm font-bold truncate"></h4>
+                <p id="player-artist-album" class="text-xs text-gray-400 truncate"></p>
+            </div>
+        </div>
+        
+        <div class="flex-1 flex flex-col items-center justify-center w-full">
+            <div class="flex items-center space-x-4 text-red-400"> <!-- Changed to red -->
+                <button id="shuffle-btn" class="player-control-btn"><i class='bx bx-shuffle text-xl'></i></button>
+                <button id="prev-btn" class="player-control-btn"><i class='bx bx-skip-previous text-xl'></i></button>
+                <button id="play-pause-btn" class="w-12 h-12 rounded-full bg-red-400 text-black flex items-center justify-center text-xl hover:bg-red-500 hover:text-white transition-colors"><i class='bx bx-play' id="play-pause-icon"></i></button> <!-- Changed to red -->
+                <button id="next-btn" class="player-control-btn"><i class='bx bx-skip-next text-xl'></i></button>
+                <button id="repeat-btn" class="player-control-btn"><i class='bx bx-repeat text-xl'></i></button>
+            </div>
+
+            <div class="flex items-center w-full mt-2">
+                <span id="current-time" class="text-xs text-gray-400 mr-2">0:00</span>
+                <div class="flex-1 h-1 bg-gray-600 rounded-lg relative">
+                    <div id="progress-gradient" class="absolute h-full rounded-lg bg-red-400" style="width: 0%;"></div> <!-- Changed to red -->
+                    <input type="range" id="progress-bar" value="0" min="0" max="100" class="flex-1 h-full absolute w-full top-0 appearance-none bg-transparent cursor-pointer">
+                </div>
+                <span id="total-time" class="text-xs text-gray-400 ml-2">0:00</span>
+                
+                <button id="volume-btn" class="player-control-btn ml-4"><i class='bx bx-volume-full text-xl' id="volume-icon"></i></button>
+                <input type="range" id="volume-bar" value="100" min="0" max="100" class="w-20 h-1 bg-gray-600 rounded-lg appearance-none cursor-pointer">
+            </div>
+        </div>
+
+        <!-- Exit & Expand Buttons (Always Visible) -->
+<div class="absolute top-2 right-3 flex items-center justify-end space-x-4 w-full md:w-1/4 mt-2 md:mt-0">
+  <button id="exit-btn" class="player-control-btn flex items-center justify-center p-2 rounded-full">
+    <i class='bx bx-x text-2xl md:text-3xl'></i>
+  </button>
+  <button id="expand-btn" class="player-control-btn flex items-center justify-center p-2 rounded-full">
+    <i class='bx bx-expand-alt text-xl md:text-2xl'></i>
+  </button>
+</div>
+
+        <audio id="audio-player" src=""></audio>
+    </div>
+
+    <script>
+        // Track data with demo audio paths
+        const tracks = [
+            { 
+                title: "Creep", 
+                artist: "Radiohead", 
+                album: "Pablo Honey", 
+                duration: "3:59", 
+                src: 'public/creep - radio head.mp3', // Update this path
+                cover: 'public/creep.jpg' // Update this path
+            },
+            { 
+                title: "Karma Police", 
+                artist: "Radiohead", 
+                album: "OK Computer", 
+                duration: "4:21", 
+                src: 'public/audio/06 Karma Police.mp3', // Update this path
+                cover: 'public/ok_computer.jpg' // Update this path
+            },
+            { 
+                title: "All I Need", 
+                artist: "Radiohead", 
+                album: "In Rainvows", 
+                duration: "3:48", 
+                src: 'public/audio/All I Need_spotdown.app.mp3', // Update this path
+                cover: 'public/In Rainbows.jpg' // Update this path
+            },
+            { 
+                title: "Let Down", 
+                artist: "Radiohead", 
+                album: "OK Computer", 
+                duration: "4:59", 
+                src: 'public/audio/05 Let Down.mp3', // Update this path
+                cover: 'public/ok_computer.jpg' // Update this path
+            },
+            { 
+                title: "Fake Plastic Trees", 
+                artist: "Radiohead", 
+                album: "the bends", 
+                duration: "6:23", 
+                src: 'public/Fake Plastic Trees_spotdown.app.mp3', // Update this path
+                cover: 'public/the bends.png' // Update this path
+            }
+        ];
+
+        // Player elements
+        const playerBar = document.getElementById('player-bar');
+        const playerAlbumArt = document.getElementById('player-album-art');
+        const playerSongTitle = document.getElementById('player-song-title');
+        const playerArtistAlbum = document.getElementById('player-artist-album');
+        const playPauseBtn = document.getElementById('play-pause-btn');
+        const playPauseIcon = document.getElementById('play-pause-icon');
+        const progressBar = document.getElementById('progress-bar');
+        const progressGradient = document.getElementById('progress-gradient');
+        const currentTime = document.getElementById('current-time');
+        const totalTime = document.getElementById('total-time');
+        const volumeBar = document.getElementById('volume-bar');
+        const volumeIcon = document.getElementById('volume-icon');
+        const shuffleBtn = document.getElementById('shuffle-btn');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const repeatBtn = document.getElementById('repeat-btn');
+        const expandBtn = document.getElementById('expand-btn');
+        const exitBtn = document.getElementById('exit-btn');
+        const mainPlayBtn = document.getElementById('main-play-btn');
+        const audio = document.getElementById('audio-player');
+
+        let currentTrackIndex = null;
+        let isPlaying = false;
+        let repeatMode = false;
+        let currentPlayingCard = null;
+
+        // Main play button (hero section)
+        mainPlayBtn.addEventListener('click', () => {
+            const randomIndex = Math.floor(Math.random() * tracks.length);
+            playTrack(randomIndex);
+        });
+
+        // Individual track play buttons
+        document.addEventListener('click', (e) => {
+            if (e.target.closest('.play-button')) {
+                const trackItem = e.target.closest('.track-item');
+                if (trackItem) {
+                    const index = parseInt(trackItem.getAttribute('data-index'));
+                    playTrack(index);
+                }
+            }
+            
+            // Track row clicks (excluding play button)
+            if (e.target.closest('.track-item') && !e.target.closest('.play-button')) {
+                const trackItem = e.target.closest('.track-item');
+                const index = parseInt(trackItem.getAttribute('data-index'));
+                playTrack(index);
+            }
+        });
+
+        // Main play/pause button
+        playPauseBtn.addEventListener('click', () => {
+            if (currentTrackIndex === null) {
+                playTrack(0);
+            } else {
+                togglePlayPause();
+            }
+        });
+
+        // Navigation buttons
+        prevBtn.addEventListener('click', () => {
+            if (currentTrackIndex !== null && currentTrackIndex > 0) {
+                playTrack(currentTrackIndex - 1);
+            }
+        });
+
+        nextBtn.addEventListener('click', () => {
+            if (currentTrackIndex !== null && currentTrackIndex < tracks.length - 1) {
+                playTrack(currentTrackIndex + 1);
+            }
+        });
+
+        shuffleBtn.addEventListener('click', () => {
+            const randomIndex = Math.floor(Math.random() * tracks.length);
+            playTrack(randomIndex);
+            shuffleBtn.classList.toggle('text-red-500'); // Changed to red
+        });
+
+        repeatBtn.addEventListener('click', () => {
+            repeatMode = !repeatMode;
+            repeatBtn.classList.toggle('text-red-500'); // Changed to red
+        });
+
+        exitBtn.addEventListener('click', () => {
+            audio.pause();
+            playerBar.classList.add('translate-y-full');
+            isPlaying = false;
+            
+            // Reset all play buttons
+            document.querySelectorAll('.play-button i').forEach(icon => {
+                icon.classList.remove('bx-pause');
+                icon.classList.add('bx-play');
+            });
+            
+            if (currentPlayingCard) {
+                const playIcon = currentPlayingCard.querySelector('.play-button i');
+                if (playIcon) {
+                    playIcon.classList.remove('bx-pause');
+                    playIcon.classList.add('bx-play');
+                }
+            }
+        });
+
+        // Play track function
+        function playTrack(index) {
+            // Reset previous playing card
+            if (currentPlayingCard) {
+                const prevIcon = currentPlayingCard.querySelector('.play-button i');
+                if (prevIcon) {
+                    prevIcon.classList.remove('bx-pause');
+                    prevIcon.classList.add('bx-play');
+                }
+            }
+
+            currentTrackIndex = index;
+            const track = tracks[index];
+            const trackCard = document.querySelector(`.track-item[data-index="${index}"]`);
+            
+            currentPlayingCard = trackCard;
+            
+            audio.src = track.src;
+            playerAlbumArt.src = track.cover;
+            playerSongTitle.textContent = track.title;
+            playerArtistAlbum.textContent = `${track.artist} • ${track.album}`;
+
+            audio.play().catch(err => {
+                console.error("Error playing:", err);
+                // Fallback: create a simple beep sound for demo
+                playDemoSound();
+            });
+            
+            isPlaying = true;
+            updatePlayPauseButton();
+            updateTrackPlayButton(index);
+            showPlayerBar();
+        }
+
+        // Demo sound for when actual audio files aren't available
+        function playDemoSound() {
+            const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            const oscillator = audioContext.createOscillator();
+            const gainNode = audioContext.createGain();
+            
+            oscillator.connect(gainNode);
+            gainNode.connect(audioContext.destination);
+            
+            oscillator.frequency.value = 440;
+            oscillator.type = 'sine';
+            
+            gainNode.gain.setValueAtTime(0, audioContext.currentTime);
+            gainNode.gain.linearRampToValueAtTime(0.1, audioContext.currentTime + 0.1);
+            gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 1);
+            
+            oscillator.start(audioContext.currentTime);
+            oscillator.stop(audioContext.currentTime + 1);
+        }
+
+        // Toggle play/pause
+        function togglePlayPause() {
+            if (isPlaying) {
+                audio.pause();
+                isPlaying = false;
+            } else {
+                audio.play().catch(err => {
+                    console.error("Error playing:", err);
+                    playDemoSound();
+                });
+                isPlaying = true;
+            }
+            updatePlayPauseButton();
+            updateTrackPlayButton(currentTrackIndex);
+        }
+
+        // Update play/pause button
+        function updatePlayPauseButton() {
+            if (isPlaying) {
+                playPauseIcon.classList.remove('bx-play');
+                playPauseIcon.classList.add('bx-pause');
+            } else {
+                playPauseIcon.classList.remove('bx-pause');
+                playPauseIcon.classList.add('bx-play');
+            }
+        }
+
+        // Update track play button
+        function updateTrackPlayButton(index) {
+            if (currentPlayingCard) {
+                const playIcon = currentPlayingCard.querySelector('.play-button i');
+                if (playIcon) {
+                    if (isPlaying) {
+                        playIcon.classList.remove('bx-play');
+                        playIcon.classList.add('bx-pause');
+                    } else {
+                        playIcon.classList.remove('bx-pause');
+                        playIcon.classList.add('bx-play');
+                    }
+                }
+            }
+        }
+
+        // Show player bar
+        function showPlayerBar() {
+            playerBar.classList.remove('translate-y-full');
+        }
+
+        // Progress bar functionality
+        audio.addEventListener('timeupdate', () => {
+            if (audio.duration) {
+                const progress = (audio.currentTime / audio.duration) * 100;
+                progressBar.value = progress;
+                progressGradient.style.width = `${progress}%`;
+                currentTime.textContent = formatTime(audio.currentTime);
+            }
+        });
+
+        audio.addEventListener('loadedmetadata', () => {
+            totalTime.textContent = formatTime(audio.duration);
+        });
+
+        progressBar.addEventListener('input', () => {
+            const seekTime = (progressBar.value / 100) * audio.duration;
+            audio.currentTime = seekTime;
+        });
+
+        // Volume control
+        volumeBar.addEventListener('input', () => {
+            audio.volume = volumeBar.value / 100;
+            updateVolumeIcon();
+        });
+
+        function updateVolumeIcon() {
+            if (audio.volume === 0) {
+                volumeIcon.className = 'bx bx-volume-mute text-xl';
+            } else if (audio.volume > 0 && audio.volume <= 0.5) {
+                volumeIcon.className = 'bx bx-volume-low text-xl';
+            } else {
+                volumeIcon.className = 'bx bx-volume-full text-xl';
+            }
+        }
+
+        // Format time helper
+        function formatTime(seconds) {
+            const minutes = Math.floor(seconds / 60);
+            const secs = Math.floor(seconds % 60).toString().padStart(2, '0');
+            return `${minutes}:${secs}`;
+        }
+
+        // Auto-play next track
+        audio.addEventListener('ended', () => {
+            if (repeatMode) {
+                audio.currentTime = 0;
+                audio.play();
+            } else if (currentTrackIndex < tracks.length - 1) {
+                playTrack(currentTrackIndex + 1);
+            } else {
+                isPlaying = false;
+                updatePlayPauseButton();
+                updateTrackPlayButton(currentTrackIndex);
+            }
+        });
+
+        // Handle audio events
+        audio.addEventListener('play', () => {
+            isPlaying = true;
+            updatePlayPauseButton();
+            updateTrackPlayButton(currentTrackIndex);
+        });
+
+        audio.addEventListener('pause', () => {
+            isPlaying = false;
+            updatePlayPauseButton();
+            updateTrackPlayButton(currentTrackIndex);
+        });
+
+        // Error handling
+        audio.addEventListener('error', () => {
+            console.error("Audio file not found:", audio.src);
+        });
+
+        // Navbar scroll effect
+        window.addEventListener("scroll", function() {
+            const nav = document.querySelector("nav");
+            if (window.scrollY > 50) { 
+                nav.classList.add("navbar-scrolled");
+            } else {
+                nav.classList.remove("navbar-scrolled");
+            }
+        });
+
+        // Mobile menu functionality
+        const menuToggle = document.getElementById('burger');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        menuToggle.addEventListener('change', () => {
+            if (menuToggle.checked) {
+                mobileMenu.classList.remove('-translate-x-full');
+            } else {
+                mobileMenu.classList.add('-translate-x-full');
+            }
+        });
+
+        // Close mobile menu when clicking on links
+        mobileMenu.querySelectorAll("a").forEach(link => {
+            link.addEventListener("click", () => {
+                menuToggle.checked = false;
+                mobileMenu.classList.add("-translate-x-full");
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+        // Initialize Swiper for the "Popular releases" carousel
+        const popularSwiper = new Swiper('#popular-carousel', {
+            slidesPerView: 2,
+            spaceBetween: 24,
+            navigation: {
+                nextEl: '#popular-carousel .swiper-button-next',
+                prevEl: '#popular-carousel .swiper-button-prev',
+            },
+            breakpoints: {
+                768: {
+                    slidesPerView: 5,
+                    spaceBetween: 24,
+                }
+            }
+        });
+
+        // Initialize Swiper for the "Albums" carousel
+        const albumsSwiper = new Swiper('#albums-carousel', {
+            slidesPerView: 2,
+            spaceBetween: 24,
+            navigation: {
+                nextEl: '#albums-carousel .swiper-button-next',
+                prevEl: '#albums-carousel .swiper-button-prev',
+            },
+            breakpoints: {
+                768: {
+                    slidesPerView: 5,
+                    spaceBetween: 24,
+                }
+            }
+        });
+
+        // Initialize Swiper for the "Singles and EPs" carousel
+        const singlesSwiper = new Swiper('#singles-carousel', {
+            slidesPerView: 2,
+            spaceBetween: 24,
+            navigation: {
+                nextEl: '#singles-carousel .swiper-button-next',
+                prevEl: '#singles-carousel .swiper-button-prev',
+            },
+            breakpoints: {
+                768: {
+                    slidesPerView: 5,
+                    spaceBetween: 24,
+                }
+            }
+        });
+        
+        // Initialize Swiper for the "Fans also like" carousel
+        const fansSwiper = new Swiper('#fans-carousel', {
+            slidesPerView: 2,
+            spaceBetween: 24,
+            navigation: {
+                nextEl: '#fans-carousel .swiper-button-next',
+                prevEl: '#fans-carousel .swiper-button-prev',
+            },
+            breakpoints: {
+                768: {
+                    slidesPerView: 5,
+                    spaceBetween: 24,
+                }
+            }
+        });
+      
+        // Select the filter buttons and content containers
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const popularContainer = document.getElementById('popular-carousel');
+        const albumsContainer = document.getElementById('albums-carousel');
+        const singlesContainer = document.getElementById('singles-carousel');
+        const showAllBtn = document.querySelector('.flex.items-center button');
+    
+        // Function to show the correct container based on the category
+        function showCategory(category) {
+          // Hide all containers first
+          popularContainer.classList.add('hidden');
+          albumsContainer.classList.add('hidden');
+          singlesContainer.classList.add('hidden');
+      
+          // Show the container for the selected category
+          if (category === 'popular') {
+            popularContainer.classList.remove('hidden');
+          } else if (category === 'albums') {
+            albumsContainer.classList.remove('hidden');
+          } else if (category === 'singles') {
+            singlesContainer.classList.remove('hidden');
+          }
+        }
+      
+        // Handle clicks on the filter buttons
+        filterButtons.forEach(button => {
+          button.addEventListener('click', () => {
+            // Manage the active state of the buttons
+            filterButtons.forEach(btn => btn.classList.remove('active', 'text-white', 'border-b-2', 'border-red-500')); // Changed to red
+            button.classList.add('active', 'text-white', 'border-b-2', 'border-red-500'); // Changed to red
+      
+            // Get the category from the data attribute
+            const category = button.dataset.category;
+            
+            // Show the correct container
+            showCategory(category);
+          });
+        });
+      
+        // Handle the "Show all" button click
+        showAllBtn.addEventListener('click', () => {
+          // Remove the active state from all filter buttons
+          filterButtons.forEach(btn => btn.classList.remove('active', 'text-white', 'border-b-2', 'border-red-500')); // Changed to red
+          // Add the active state back to the 'Popular releases' button
+          document.querySelector('[data-category="popular"]').classList.add('active', 'text-white', 'border-b-2', 'border-red-500'); // Changed to red
+    
+          // Show all items by showing the popular releases grid
+          showCategory('popular');
+        });
+    
+        // Initial load: Show the popular releases
+        showCategory('popular');
+    });
+
+     const mediaContainer = document.querySelector('.relative.group');
+    const video = document.getElementById('about-video');
+
+    if (mediaContainer && video) {
+        mediaContainer.addEventListener('mouseenter', () => {
+            video.play();
+        });
+
+        mediaContainer.addEventListener('mouseleave', () => {
+            video.pause();
+            video.currentTime = 0; // Rewind the video to the start
+        });
+    }
+
+    </script>
+   
+
+</body>
+</html>
