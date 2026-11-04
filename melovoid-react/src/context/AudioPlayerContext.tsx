@@ -165,7 +165,7 @@ export const AudioPlayerProvider: React.FC<{ children: React.ReactNode }> = ({ c
           setIsPlaying(true);
         })
         .catch((err) => {
-          console.log('Playback error:', err);
+          console.warn(`Playback error on "${song.title}" (${audio.src}):`, err);
           setIsPlaying(false);
         });
     }
@@ -205,7 +205,7 @@ export const AudioPlayerProvider: React.FC<{ children: React.ReactNode }> = ({ c
     };
 
     const handleError = (e: Event) => {
-      console.warn('Audio error:', e);
+      console.warn(`Audio error loading: ${audio.src}`, e);
       setIsPlaying(false);
     };
 
